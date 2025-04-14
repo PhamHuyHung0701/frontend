@@ -1,0 +1,27 @@
+<app-menu></app-menu>
+
+<div class="toast-container" *ngIf="message">
+  <div class="toast" [ngClass]="{'success': code === 1, 'error': code !== 1}">
+    {{ message }}
+  </div>
+</div>
+<div class="book-detail-container">
+  <div class="book-image">
+    <img [src]="book?.imageUrl" [alt]="book?.name" />
+  </div>
+  <div class="book-info">
+    <h1 class="book-title">{{ book?.name }}</h1>
+    <p class="book-author"><strong>Tác giả:</strong> {{ book?.author }}</p>
+    <p class="book-category"><strong>Thể loại:</strong> {{ book?.category }}</p>
+    <p class="book-price"><strong>Giá:</strong> {{ book?.price | currency: 'VND' }}</p>
+    <p class="book-quantity"><strong>Số lượng còn lại:</strong> {{ book?.quantity }}</p>
+    <div class="book-description">
+      <h2>Mô tả</h2>
+      <p>{{ book?.description }}</p>
+    </div>
+    <div class="button-group">
+      <button class="add-to-cart-btn" (click)="onAddShoppingCart()">Thêm vào giỏ hàng</button>
+      <button class="buy-now-btn" >Mua ngay</button>
+    </div>
+  </div>
+</div>

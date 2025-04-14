@@ -1,0 +1,26 @@
+<app-menu></app-menu>
+
+<div class="image-slider">
+  <button class="prev-button" (click)="prevImage()">&#10094;</button>
+  <img [src]="images[currentImageIndex]" alt="Banner" class="slider-image" />
+  <button class="next-button" (click)="nextImage()">&#10095;</button>
+</div>
+
+<form>
+  <div class="book-list">
+    <div *ngFor="let book of paginatedBooks" class="book-card" (click)="bookClick(book)">
+        <img [src]="book.imageUrl" [alt]="book.name" class="book-image" />
+        <div class="book-info">
+          <h3 class="book-title">{{ book.name }}</h3>
+          <p class="book-price">Giá: {{ book.price | currency:'VND' }}</p>
+        </div>
+    </div>
+  </div>
+</form>
+
+<div class="pagination">
+  <button *ngFor="let page of pagesToShow" [class.active]="page === currentPage" [class.dots]="page === -1"
+    (click)="goToPage(page)" [disabled]="page === -1">
+    {{ page === -1 ? '...' : page }}
+  </button>
+</div>

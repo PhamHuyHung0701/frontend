@@ -1,0 +1,26 @@
+
+<app-menu></app-menu>
+
+<form>
+  <div class="book-list">
+    <div *ngFor="let book of paginatedBooks" class="book-card" (click)="bookClick(book)">
+        <img [src]="book.imageUrl" [alt]="book.name" class="book-image" />
+        <div class="book-info">
+          <h3 class="book-title">{{ book.name }}</h3>
+          <p class="book-price">Giá: {{ book.price | currency:'VND' }}</p>
+        </div>
+    </div>
+  </div>
+</form>
+  
+  <div class="pagination">
+    <button
+      *ngFor="let page of pagesToShow"
+      [class.active]="page === currentPage"
+      [class.dots]="page === -1"
+      (click)="goToPage(page)"
+      [disabled]="page === -1"
+    >
+      {{ page === -1 ? '...' : page }}
+    </button>
+  </div>
