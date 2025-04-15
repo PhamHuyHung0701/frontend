@@ -7,6 +7,7 @@ import { SearchErrorComponent } from './Components/search-error/search-error.com
 import { BookinfoComponent } from './Components/bookinfo/bookinfo.component';
 import { SearchCategotyComponent } from './Components/search-categoty/search-categoty.component';
 import { ShopCartComponent } from './Components/shop-cart/shop-cart.component';
+import { PaymentComponent } from './Components/payment/payment.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'bookdetail', component: BookinfoComponent},
     { path: 'searchcategory', component: SearchCategotyComponent},
     { path: 'shopcart', component: ShopCartComponent},
+    { path: 'payment', component: PaymentComponent},
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

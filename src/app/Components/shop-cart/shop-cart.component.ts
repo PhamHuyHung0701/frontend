@@ -123,7 +123,8 @@ export class ShopCartComponent {
   }
   
   checkout() {
-    // Logic xử lý thanh toán
-    console.log('Thanh toán giỏ hàng:', this.data);
+    localStorage.setItem('selectedBooks', JSON.stringify(this.selectedBooks));
+    localStorage.setItem('totalPrice', JSON.stringify(this.calculateSelectedTotal()));
+    this.router.navigate(['/payment']);
   }
 }
