@@ -1,0 +1,149 @@
+.book-manage-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+  
+    .book-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  
+      th, td {
+        border: 1px solid #ddd;
+        padding: 10px;
+        text-align: center;
+      }
+  
+      th {
+        background-color: #f4f4f4;
+        color: #333;
+        font-weight: bold;
+      }
+  
+      tr:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+  
+      tr:hover {
+        background-color: #f1f1f1;
+      }
+  
+      .book-image {
+        width: 50px;
+        height: 50px;
+        object-fit: cover;
+        border-radius: 5px;
+      }
+  
+      button {
+        padding: 5px 10px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 14px;
+        margin: 0 5px;
+      }
+  
+      button:hover {
+        opacity: 0.9;
+      }
+  
+      button:first-child {
+        background-color: #4CAF50; /* Màu xanh cho nút Sửa */
+        color: white;
+      }
+  
+      button:first-child:hover {
+        background-color: #45a049;
+      }
+  
+      button:last-child {
+        background-color: #f44336; /* Màu đỏ cho nút Xóa */
+        color: white;
+      }
+  
+      button:last-child:hover {
+        background-color: #d32f2f;
+      }
+    }
+  
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+  
+      button {
+        padding: 5px 10px;
+        border: 1px solid #ddd;
+        background-color: #f4f4f4;
+        cursor: pointer;
+        border-radius: 3px;
+  
+        &:hover {
+          background-color: #e0e0e0;
+        }
+  
+        &:disabled {
+          background-color: #e0e0e0;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .toast-container {
+    position: fixed;
+    top: 60%; /* Căn giữa theo chiều dọc */
+    left: 70%; /* Căn giữa theo chiều ngang */
+    transform: translate(-50%, -50%); /* Dịch chuyển để căn giữa chính xác */
+    z-index: 1000; /* Đảm bảo thông báo luôn hiển thị trên các phần tử khác */
+  }
+  
+  .toast {
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    animation: fadeInOut 3s ease forwards;
+    opacity: 0.9;
+    text-align: center;
+  }
+  
+  .success {
+    color: #155724;
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+  }
+  
+  .error {
+    color: #721c24;
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+  }
+  
+  /* Hiệu ứng fade-in và fade-out */
+  @keyframes fadeInOut {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+    10% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    90% {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-50%, -60%);
+    }
+  }

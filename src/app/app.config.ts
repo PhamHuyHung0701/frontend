@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
 
-export const API_URL = 'https://34a9-42-115-134-124.ngrok-free.app/api/';
+export const API_URL = 'https://9e38-42-115-134-124.ngrok-free.app/api/';
 export const appConfig: ApplicationConfig = {
   providers: [provideRouter(routes)],
   
