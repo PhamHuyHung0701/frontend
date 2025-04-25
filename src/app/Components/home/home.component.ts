@@ -34,8 +34,9 @@ export class HomeComponent {
 
   currentImageIndex = 0; // Chỉ số ảnh hiện tại
   images = [
-    'assets/banner1.jpg', // Đường dẫn ảnh 1
-    'assets/banner2.jpg'  // Đường dẫn ảnh 2
+    'assets/banner1.jpg', 
+    'assets/banner2.jpg',
+    'assets/banner3.jpg' 
   ];
 
   constructor(private http: HttpClient, private router: Router) {}

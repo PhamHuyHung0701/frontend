@@ -5,6 +5,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { API_URL } from '../../app.config';
 import { MenuComponent } from '../menu/menu.component';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UpdateBookComponent } from '../update-book/update-book.component';
 
 export interface Book {
   id: number;
@@ -20,7 +22,7 @@ export interface Book {
 @Component({
   selector: 'app-book-manage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule,MatDialogModule, CommonModule, MenuComponent],
   templateUrl: './book-manage.component.html',
   styleUrl: './book-manage.component.scss'
 })
@@ -39,7 +41,9 @@ export class BookManageComponent {
   itemsPerPage = 8;
   paginatedBooks: Book[] = [];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient,
+     private router: Router,
+     private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getBooks();
@@ -176,5 +180,12 @@ export class BookManageComponent {
     );
   }
   editBook(book: Book) {
+    localStorage.setItem('bookUpdate', JSON.stringify(book));
+    const dialogRef = this.dialog.open(UpdateBookComponent, {
+      width: '50%',
+      height: '50%',
+      data: {book}
+    });
   }
+
 }
