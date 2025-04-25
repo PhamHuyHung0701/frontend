@@ -182,8 +182,8 @@ export class BookManageComponent {
   editBook(book: Book) {
     localStorage.setItem('bookUpdate', JSON.stringify(book));
     const dialogRef = this.dialog.open(UpdateBookComponent, {
-      width: '50%',
-      height: '50%',
+      width: '40%',
+      height: '70%',
       data: {book}
     });
   }
