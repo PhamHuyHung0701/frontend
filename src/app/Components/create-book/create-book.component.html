@@ -1,44 +1,43 @@
 <h2>Update Book</h2>
+<div class="toast-container" *ngIf="message">
+  <div class="toast" [ngClass]="{'success': code === 1, 'error': code !== 1}">
+    {{ message }}
+  </div>
+</div>
 <form *ngIf="book" (ngSubmit)="onSubmit()">
-    <div>
-        <label for="name">Tên sách:</label>
-        <input id="name" type="text" maxlength="255" [(ngModel)]="book.name" name="name" required
-            placeholder="Nhập tên sách" />
+  <div>
+    <label for="name">Tên sách:</label>
+    <input id="name" type="text" maxlength="255" [(ngModel)]="book.name" name="name" required />
+  </div>
+  <div>
+    <label for="price">Giá:</label>
+    <input id="price" type="number" [(ngModel)]="book.price" name="price" required min="0" />
+  </div>
+  <div>
+    <label for="quantity">Số lượng còn lại:</label>
+    <input id="quantity" type="number" [(ngModel)]="book.quantity" name="quantity" required min="0" />
+  </div>
+  <div>
+    <label for="author">Tác giả:</label>
+    <input id="author" type="text" maxlength="255" [(ngModel)]="book.author" name="author" required />
+  </div>
+  <div>
+    <label for="imageUrl">Ảnh:</label>
+    <input id="imageUrl" type="file" (change)="onFileSelected($event)" />
+    <div *ngIf="book.imageUrl">
+      <img [src]="book.imageUrl" alt="Book Image" style="max-width: 200px; margin-top: 10px;" />
     </div>
-    <div>
-        <label for="price">Giá:</label>
-        <input id="price" type="number" [(ngModel)]="book.price" name="price" required min="0"
-            placeholder="Nhập giá sách" />
-    </div>
-    <div>
-        <label for="quantity">Số lượng còn lại:</label>
-        <input id="quantity" type="number" [(ngModel)]="book.quantity" name="quantity" required min="0"
-            placeholder="Nhập số lượng còn lại" />
-    </div>
-    <div>
-        <label for="author">Tác giả:</label>
-        <input id="author" type="text" maxlength="255" [(ngModel)]="book.author" name="author" required
-            placeholder="Nhập tên tác giả" />
-    </div>
-    <div>
-        <label for="imageUrl">Ảnh:</label>
-        <input id="imageUrl" type="file" (change)="onFileSelected($event)" />
-        <div *ngIf="book.imageUrl">
-            <img [src]="book.imageUrl" alt="Book Image" style="max-width: 200px; margin-top: 10px;" />
-        </div>
-    </div>
-    <div>
-        <label for="description">Mô tả:</label>
-        <textarea id="description" [(ngModel)]="book.description" name="description"
-            placeholder="Nhập mô tả về sách"></textarea>
-    </div>
-    <div>
-        <label for="category">Thể loại:</label>
-        <input id="category" type="text" [(ngModel)]="book.category" name="category" required
-            placeholder="Nhập thể loại sách" />
-    </div>
-    <div class="button-group">
-        <button type="submit">Lưu</button>
-        <button type="button" (click)="closeWindow()">Đóng</button>
-    </div>
+  </div>
+  <div>
+    <label for="description">Mô tả:</label>
+    <textarea id="description" [(ngModel)]="book.description" name="description"></textarea>
+  </div>
+  <div>
+    <label for="category">Thể loại:</label>
+    <input id="category" type="text" [(ngModel)]="book.category" name="category" required />
+  </div>
+  <div class="button-group">
+    <button type="submit" (click)="onSubmit()">Lưu</button>
+    <button type="button" (click)="closeWindow()">Đóng</button>
+  </div>
 </form>

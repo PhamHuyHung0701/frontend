@@ -56,7 +56,6 @@ export class HomeComponent {
 
   ngOnInit() {
     this.getBooks();
-    
   }
 
   getBooks() {
