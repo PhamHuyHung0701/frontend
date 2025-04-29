@@ -7,6 +7,7 @@ import { MenuComponent } from '../menu/menu.component';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UpdateBookComponent } from '../update-book/update-book.component';
+import { CreateBookComponent } from '../create-book/create-book.component';
 
 export interface Book {
   id: number;
@@ -185,6 +186,12 @@ export class BookManageComponent {
       width: '40%',
       height: '70%',
       data: {book}
+    });
+  }
+  addNewBook() {
+    const dialogRef = this.dialog.open(CreateBookComponent, {
+      width: '40%',
+      height: '70%'
     });
   }
 

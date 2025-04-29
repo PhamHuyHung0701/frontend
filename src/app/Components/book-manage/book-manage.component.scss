@@ -8,6 +8,30 @@
       color: #333;
     }
   
+    .add-book-button button {
+      background-color: #4CAF50; /* Màu xanh lá */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    
+    .add-book-button button:hover {
+      background-color: #45a049; /* Màu xanh lá đậm hơn khi hover */
+    }
+    
+    .add-book-button button:active {
+      background-color: #3e8e41; /* Màu xanh lá đậm hơn khi nhấn */
+    }
+    
+    .add-book-button {
+      margin-bottom: 20px; /* Khoảng cách giữa nút và các phần tử khác */
+      text-align: center; /* Canh giữa nút */
+    }
+    
     .book-table {
       width: 100%;
       border-collapse: collapse;

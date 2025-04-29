@@ -5,7 +5,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { API_URL } from '../../app.config';
-import { UpdateBookComponent } from '../update-book/update-book.component';
 
 export interface Book {
   id: number;
@@ -38,13 +37,22 @@ export class CreateBookComponent {
 
   api_url: string = '';
 
-  book: Book | null = null;
+  book: Book = {
+    id: 1, // ID mặc định hoặc giá trị từ nguồn khác
+    name: '',
+    price: 0,
+    quantity: 0,
+    author: '',
+    imageUrl: '',
+    description: '',
+    category: '',
+    selected: false
+  };
 
-  constructor(@Inject(MAT_DIALOG_DATA) public dataCreate: { book: Book },
+  constructor(
     public dialogRef: MatDialogRef<CreateBookComponent>,
     private http: HttpClient,
     private router: Router) {
-    this.book = dataCreate.book;
   }
   
   onSubmit() {
@@ -74,7 +82,7 @@ export class CreateBookComponent {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
       
-    this.http.put(this.apiUrl, dataSubmit, {headers}).subscribe(
+    this.http.post(this.apiUrl, dataSubmit, {headers}).subscribe(
             (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -128,6 +136,5 @@ export class CreateBookComponent {
   closeWindow() {
     this.dialogRef.close();
   }
-
 
 }
