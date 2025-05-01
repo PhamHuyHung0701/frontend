@@ -66,6 +66,10 @@ export class MenuComponent {
       )
   }
 
+  isLoggedIn()
+  {
+    return this.idToken !== null && this.idToken.trim() !== '';
+  }
   onClickLevel1(menu: Menu){
        if(menu.id === 16)
        {
@@ -89,10 +93,6 @@ export class MenuComponent {
 
   }
 
-  isLoggedIn(): boolean {
-    return this.idToken !== null && this.idToken.trim() !== '';
-  }
-
   onSearch() {
     localStorage.setItem('searchText', JSON.stringify(this.searchText));
     if (this.router.url === '/searchpage') {
@@ -100,5 +100,11 @@ export class MenuComponent {
     } else {
       this.router.navigate(['/searchpage']);
     }
+  }
+
+  onLogOut()
+  {
+    localStorage.setItem('idToken', '');
+    window.location.reload();
   }
 }
