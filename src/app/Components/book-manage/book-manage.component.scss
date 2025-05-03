@@ -171,3 +171,40 @@
       transform: translate(-50%, -60%);
     }
   }
+
+  /* CSS cho form tìm kiếm */
+.search-form {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Khoảng cách giữa các phần tử */
+  margin-bottom: 20px; /* Khoảng cách dưới form */
+}
+
+.search-form input[type="text"] {
+  flex: 1; /* Để input chiếm toàn bộ chiều rộng còn lại */
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.search-form input[type="text"]:focus {
+  border-color: #007bff; /* Đổi màu viền khi input được focus */
+}
+
+.search-form button[type="submit"] {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search-form button[type="submit"]:hover {
+  background-color: #0056b3; /* Màu khi hover */
+}

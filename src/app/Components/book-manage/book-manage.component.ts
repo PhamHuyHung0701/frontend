@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { API_URL } from '../../app.config';
@@ -84,6 +84,7 @@ export class BookManageComponent {
       }
     );
   }
+
 
   updatePaginatedBooks() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
@@ -195,4 +196,30 @@ export class BookManageComponent {
     });
   }
 
+  searchText: string = '';
+  searchBook() {
+    this.apiUrl = API_URL + 'product';
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
+    const params = new HttpParams().set('name', this.searchText);
+
+    this.http.get(this.apiUrl, { headers, params }).subscribe(
+      (response: any) => {
+        this.message = response.message;
+        this.code = response.code;
+        this.data = response.object;
+        if (this.code === 1) {
+          this.books = response.object;
+          this.updatePaginatedBooks();
+        } else {
+          this.router.navigate(['/searcherror']);
+        }
+      },
+      error => {
+        console.log('Error: ' + error.message);
+      }
+    );
+  }
 }

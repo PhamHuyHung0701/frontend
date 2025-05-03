@@ -51,7 +51,7 @@ export class HomeComponent {
   }
 
   currentPage = 1; // Trang hiện tại
-  itemsPerPage = 8; // Số sách trên mỗi trang
+  itemsPerPage = 12; // Số sách trên mỗi trang
   paginatedBooks: Book[] = [];
 
   ngOnInit() {

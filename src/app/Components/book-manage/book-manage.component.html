@@ -9,7 +9,12 @@
 
 <div class="book-manage-container">
     <h1>Danh sách sách</h1>
-    
+
+    <form class="search-form" (ngSubmit)="searchBook()" #loginForm="ngForm">
+      <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText" placeholder="Nhập từ khóa tìm kiếm" required />
+      <button type="submit">Tìm kiếm</button>
+    </form>
+
     <div class="add-book-button">
       <button (click)="addNewBook()">Thêm mới sách</button>
     </div>

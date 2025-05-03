@@ -35,8 +35,6 @@ export class CreateBookComponent {
 
   idToken: string = '';
 
-  api_url: string = '';
-
   book: Book = {
     id: 1, // ID mặc định hoặc giá trị từ nguồn khác
     name: '',
