@@ -54,7 +54,7 @@ export class BookinfoComponent {
     }
 
     const loginData = {
-      productId : this.book?.id,
+      productId: this.book?.id,
     };
     const language = navigator.language;
     const headers = new HttpHeaders()
@@ -67,7 +67,7 @@ export class BookinfoComponent {
         this.code = response.code;
         this.data = response.object;
         if (this.code === 1) {
-          this.message = response.message; 
+          this.message = response.message;
           setTimeout(() => {
             this.message = '';
           }, 3000);

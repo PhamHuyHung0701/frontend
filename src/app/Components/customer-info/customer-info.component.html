@@ -1,1 +1,47 @@
 <app-menu></app-menu>
+
+
+<div class="customer-info-container">
+    <!-- Thông tin khách hàng -->
+    <div class="customer-details">
+      <h2>Thông tin khách hàng</h2>
+      <div *ngIf="user; else noUser">
+        <p><strong>Tên:</strong> {{ user.name }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Địa chỉ:</strong> {{ user.address }}</p>
+      </div>
+      <ng-template #noUser>
+        <p>Không có thông tin khách hàng.</p>
+      </ng-template>
+    </div>
+  
+    <!-- Bảng thông tin các hóa đơn -->
+    <div class="bills-table">
+      <h2>Danh sách hóa đơn</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Ngày</th>
+            <th>Tổng tiền</th>
+            <th>Địa chỉ</th>
+            <th>Mô tả</th>
+            <th>Số điện thoại</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let bill of bills; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ bill.date }}</td>
+            <td>{{ bill.totalPrice | currency:'VND' }}</td>
+            <td>{{ bill.address }}</td>
+            <td>{{ bill.description }}</td>
+            <td>{{ bill.phoneNumber }}</td>
+          </tr>
+          <tr *ngIf="bills.length === 0">
+            <td colspan="6">Không có hóa đơn nào.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -23,7 +23,7 @@ export interface Book {
 @Component({
   selector: 'app-book-manage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule,MatDialogModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule, MenuComponent],
   templateUrl: './book-manage.component.html',
   styleUrl: './book-manage.component.scss'
 })
@@ -43,8 +43,8 @@ export class BookManageComponent {
   paginatedBooks: Book[] = [];
 
   constructor(private http: HttpClient,
-     private router: Router,
-     private dialog: MatDialog) { }
+    private router: Router,
+    private dialog: MatDialog) { }
 
   ngOnInit() {
     this.getBooks();
@@ -64,9 +64,9 @@ export class BookManageComponent {
     this.apiUrl = API_URL + 'product/home';
     const language = navigator.language;
     const headers = new HttpHeaders()
-    .set('Accept-Language', language)
-    .set('Authorization', `Bearer ${this.idToken}`)
-    .set('ngrok-skip-browser-warning', 'true');
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
     this.http.get(this.apiUrl, { headers }).subscribe(
       (response: any) => {
         this.message = response.message;
@@ -155,9 +155,9 @@ export class BookManageComponent {
     }
     const language = navigator.language;
     const headers = new HttpHeaders()
-    .set('Accept-Language', language)
-    .set('Authorization', `Bearer ${this.idToken}`)
-    .set('ngrok-skip-browser-warning', 'true');
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
 
     this.http.delete(this.apiUrl, { headers }).subscribe(
       (response: any) => {
@@ -186,7 +186,7 @@ export class BookManageComponent {
     const dialogRef = this.dialog.open(UpdateBookComponent, {
       width: '40%',
       height: '70%',
-      data: {book}
+      data: { book }
     });
   }
   addNewBook() {

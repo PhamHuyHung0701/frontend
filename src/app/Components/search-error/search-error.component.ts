@@ -8,14 +8,14 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-search-error',
   standalone: true,
-  imports: [ ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
   templateUrl: './search-error.component.html',
   styleUrl: './search-error.component.scss'
 })
 export class SearchErrorComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   goBack() {
-    this.router.navigate(['/home']); 
+    this.router.navigate(['/home']);
   }
 }

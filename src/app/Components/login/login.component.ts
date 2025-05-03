@@ -4,8 +4,7 @@ import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { API_URL } from '../../app.config';
-export interface Response
-{
+export interface Response {
   object: Data;
   code: number;
   message: string;
@@ -17,16 +16,14 @@ export interface Menu {
   children: Menu[];
 }
 
-export interface User
-{
+export interface User {
   id: number;
   email: string;
   name: string;
   address: string;
 }
 
-export interface Data
-{
+export interface Data {
   idToken: string;
   roles: string[];
   user: User;
@@ -35,39 +32,38 @@ export interface Data
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule,CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 
 export class LoginComponent {
-  @Input() email: string ='';
-  @Input() password: string ='';
-  apiUrl: string = API_URL+'login'; // URL to web api
-  code: number=0;
-  message: string='';
-  data: Data[]=[];
-  idToken: string='';
-  roles: string[]=[];
-  user: User| null=null;
-  menu: Menu[]=[];
+  @Input() email: string = '';
+  @Input() password: string = '';
+  apiUrl: string = API_URL + 'login'; // URL to web api
+  code: number = 0;
+  message: string = '';
+  data: Data[] = [];
+  idToken: string = '';
+  roles: string[] = [];
+  user: User | null = null;
+  menu: Menu[] = [];
 
-  constructor(private http: HttpClient,private router:Router) {}
-  
+  constructor(private http: HttpClient, private router: Router) { }
+
   onSubmit() {
     const loginData = {
       email: this.email,
       password: this.password
     };
-    const language=navigator.language;
+    const language = navigator.language;
     const headers = new HttpHeaders().set('Accept-Language', language).set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, loginData,{headers}).subscribe(
-      (response: any)=>{
+    this.http.post(this.apiUrl, loginData, { headers }).subscribe(
+      (response: any) => {
         this.message = response.message;
         this.code = response.code;
         this.data = response.object;
-        if(this.code === 1)
-        {
+        if (this.code === 1) {
           alert(response.message);
           this.idToken = response.object.idToken;
           this.user = response.object.user;
@@ -79,13 +75,13 @@ export class LoginComponent {
           localStorage.setItem('roles', JSON.stringify(this.roles));
           this.router.navigate(['/home']);
         }
-        else{
+        else {
           alert(response.message);
         }
       },
       error => {
         alert("Đăng nhập thất bại")
-      } 
+      }
     )
   }
 }

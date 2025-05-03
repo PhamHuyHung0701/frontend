@@ -52,7 +52,7 @@ export class CreateBookComponent {
     private http: HttpClient,
     private router: Router) {
   }
-  
+
   onSubmit() {
     this.apiUrl = API_URL + 'admin/product';
     const tokenData = localStorage.getItem('idToken')?.trim();
@@ -63,8 +63,8 @@ export class CreateBookComponent {
       this.idToken = '';
     }
 
-    const dataSubmit ={
-      id : this.book?.id,
+    const dataSubmit = {
+      id: this.book?.id,
       name: this.book?.name,
       price: this.book?.price,
       quantity: this.book?.quantity,
@@ -79,14 +79,14 @@ export class CreateBookComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-      
-    this.http.post(this.apiUrl, dataSubmit, {headers}).subscribe(
-            (response: any) => {
+
+    this.http.post(this.apiUrl, dataSubmit, { headers }).subscribe(
+      (response: any) => {
         this.message = response.message;
         this.code = response.code;
         this.data = response.object;
         if (this.code === 1) {
-          this.message = response.message; 
+          this.message = response.message;
           setTimeout(() => {
             this.message = '';
           }, 3000);

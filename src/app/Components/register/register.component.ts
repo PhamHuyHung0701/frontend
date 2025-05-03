@@ -18,7 +18,7 @@ export class RegisterComponent {
   @Input() address: string = '';
   @Input() password: string = '';
   @Input() rePassword: string = '';
-  apiUrl: string = API_URL+'register'; // URL to web api
+  apiUrl: string = API_URL + 'register'; // URL to web api
   message: any;
   code: any;
   data: any;

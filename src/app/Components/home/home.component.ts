@@ -34,12 +34,12 @@ export class HomeComponent {
 
   currentImageIndex = 0; // Chỉ số ảnh hiện tại
   images = [
-    'assets/banner1.jpg', 
+    'assets/banner1.jpg',
     'assets/banner2.jpg',
-    'assets/banner3.jpg' 
+    'assets/banner3.jpg'
   ];
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   nextImage() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;

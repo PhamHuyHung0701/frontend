@@ -9,17 +9,19 @@ import { SearchCategotyComponent } from './Components/search-categoty/search-cat
 import { ShopCartComponent } from './Components/shop-cart/shop-cart.component';
 import { PaymentComponent } from './Components/payment/payment.component';
 import { BookManageComponent } from './Components/book-manage/book-manage.component';
+import { CustomerInfoComponent } from './Components/customer-info/customer-info.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'home',component: HomeComponent},
-    { path: 'searchpage', component: SearchpageComponent},
-    { path: 'searcherror', component: SearchErrorComponent},
-    { path: 'bookdetail', component: BookinfoComponent},
-    { path: 'searchcategory', component: SearchCategotyComponent},
-    { path: 'shopcart', component: ShopCartComponent},
-    { path: 'payment', component: PaymentComponent},
-    { path: 'bookmanage', component: BookManageComponent},
+    { path: 'home', component: HomeComponent },
+    { path: 'searchpage', component: SearchpageComponent },
+    { path: 'searcherror', component: SearchErrorComponent },
+    { path: 'bookdetail', component: BookinfoComponent },
+    { path: 'searchcategory', component: SearchCategotyComponent },
+    { path: 'shopcart', component: ShopCartComponent },
+    { path: 'payment', component: PaymentComponent },
+    { path: 'bookmanage', component: BookManageComponent },
+    { path: 'customerinfo', component: CustomerInfoComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

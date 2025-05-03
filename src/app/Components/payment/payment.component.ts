@@ -26,33 +26,32 @@ export interface Book {
   styleUrl: './payment.component.scss'
 })
 export class PaymentComponent {
- 
-  @Input()  address: string = '';
-  @Input()  phone: string = '';
+
+  @Input() address: string = '';
+  @Input() phone: string = '';
   selectedBooks: Book[] = [];
   totalPrice: number = 0;
-  code: number=0;
-  message: string='';
+  code: number = 0;
+  message: string = '';
   data: string = '';
   apiUrl: string = '';
   idToken: string = '';
   notificationMessage: string = '';
 
   constructor(private http: HttpClient, private router: Router) { }
-  
+
   ngOnInit() {
     const selectedBooksData = localStorage.getItem('selectedBooks')?.trim();
-    if(selectedBooksData) {
+    if (selectedBooksData) {
       this.selectedBooks = JSON.parse(selectedBooksData);
     }
     const totalPrice = localStorage.getItem('totalPrice')?.trim();
-    if(totalPrice) {
+    if (totalPrice) {
       this.totalPrice = JSON.parse(totalPrice);
     }
   }
 
-  submitPayment()
-  {
+  submitPayment() {
 
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
@@ -70,33 +69,32 @@ export class PaymentComponent {
       phoneNumber: this.phone
     };
 
-    const language=navigator.language;
+    const language = navigator.language;
     const headers = new HttpHeaders()
-    .set('Accept-Language', language)
-    .set('Authorization', `Bearer ${this.idToken}`)
-    .set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, data,{headers}).subscribe(
-      (response: any)=>{
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
+    this.http.post(this.apiUrl, data, { headers }).subscribe(
+      (response: any) => {
         this.message = response.message;
         this.code = response.code;
         this.data = response.object;
-        if(this.code === 1)
-        {
-          this.message = response.message; 
+        if (this.code === 1) {
+          this.message = response.message;
           setTimeout(() => {
             this.message = '';
           }, 3000);
         }
-        else{
-          this.message = response.message; 
+        else {
+          this.message = response.message;
           setTimeout(() => {
             this.message = '';
           }, 3000);
         }
       },
       error => {
-        console.log("Error: "+error.message);
-      } 
+        console.log("Error: " + error.message);
+      }
     )
   }
 }

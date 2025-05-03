@@ -36,7 +36,7 @@ export class SearchCategotyComponent {
   itemsPerPage = 8; // Số sách trên mỗi trang
   paginatedBooks: Book[] = []; // Danh sách sách hiển thị trên trang hiện tại
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
     this.apiUrl = API_URL + 'product/category';
