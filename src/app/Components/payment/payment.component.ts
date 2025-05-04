@@ -80,10 +80,8 @@ export class PaymentComponent {
         this.code = response.code;
         this.data = response.object;
         if (this.code === 1) {
-          this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
+          alert(response.message);
+          this.router.navigate(['/home']);
         }
         else {
           this.message = response.message;

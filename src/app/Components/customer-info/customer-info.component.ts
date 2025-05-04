@@ -42,7 +42,7 @@ export class CustomerInfoComponent {
   constructor(private http: HttpClient, private router: Router) { }
 
   ngOnInit() {
-
+     this.getCustomerInfo();
   }
 
   getCustomerInfo() {
@@ -61,7 +61,7 @@ export class CustomerInfoComponent {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.post(this.apiUrl, { headers }).subscribe(
+    this.http.get(this.apiUrl, { headers }).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

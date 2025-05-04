@@ -38,10 +38,10 @@
       <h2>Thông tin thanh toán</h2>
       <form>
         <label for="address">Địa chỉ:</label>
-        <input type="text" id="address" [(ngModel)]="address" placeholder="Nhập địa chỉ của bạn" />
+        <input type="text" id="address" [(ngModel)]="address" name="address" placeholder="Nhập địa chỉ của bạn" />
 
         <label for="phone">Số điện thoại:</label>
-        <input type="text" id="phone" [(ngModel)]="phone" placeholder="Nhập số điện thoại của bạn" />
+        <input type="text" id="phone" [(ngModel)]="phone" name="phone" placeholder="Nhập số điện thoại của bạn" />
 
         <button type="button" (click)="submitPayment()">Thanh Toán</button>
       </form>
