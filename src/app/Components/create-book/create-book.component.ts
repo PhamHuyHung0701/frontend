@@ -18,6 +18,11 @@ export interface Book {
   selected: false;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-create-book',
   standalone: true,
@@ -34,6 +39,7 @@ export class CreateBookComponent {
   apiUrl: string = '';
 
   idToken: string = '';
+  listCategory: Category[] = [];
 
   book: Book = {
     id: 1, // ID mặc định hoặc giá trị từ nguồn khác
@@ -51,6 +57,10 @@ export class CreateBookComponent {
     public dialogRef: MatDialogRef<CreateBookComponent>,
     private http: HttpClient,
     private router: Router) {
+  }
+
+  ngOnInit() {
+    this.getListCategory();
   }
 
   onSubmit() {
@@ -87,19 +97,12 @@ export class CreateBookComponent {
         this.data = response.object;
         if (this.code === 1) {
           this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
+          alert(this.message)
           this.dialogRef.close();
-          // alert(this.message)
         }
         else {
           this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
-          this.dialogRef.close();
-          // alert(this.message)
+          alert(this.message)  
         }
       },
       error => {
@@ -135,4 +138,36 @@ export class CreateBookComponent {
     this.dialogRef.close();
   }
 
+  getListCategory() {
+    this.apiUrl = API_URL + 'category';
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    }
+    else {
+      this.idToken = '';
+    }
+
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
+    
+    this.http.get(this.apiUrl, { headers }).subscribe(
+      (response: any) => {
+        this.message = response.message;
+        this.code = response.code;
+        if (this.code === 1) {
+          this.listCategory = response.object;
+        }
+        else {
+          console.log(response.message);
+        }
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    )
+  }
 }

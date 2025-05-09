@@ -1,9 +1,4 @@
 <h2>Thêm mới sách</h2>
-<div class="toast-container" *ngIf="message">
-  <div class="toast" [ngClass]="{'success': code === 1, 'error': code !== 1}">
-    {{ message }}
-  </div>
-</div>
 
 <form (ngSubmit)="onSubmit()">
   <div>
@@ -35,10 +30,12 @@
   </div>
   <div>
     <label for="category">Thể loại:</label>
-    <input id="category" type="text" [(ngModel)]="book.category" name="category" required />
+    <select id="category" [(ngModel)]="book.category" name="book.category" required class="custom-select">
+      <option *ngFor="let category of listCategory" [value]="category.name">{{ category.name }}</option>
+    </select>
   </div>
   <div class="button-group">
-    <button type="submit" (click)="onSubmit()">Lưu</button>
-    <button type="button" (click)="closeWindow()">Đóng</button>
+    <button type="button" (click)="onSubmit()" class="btn-save">Lưu</button>
+    <button type="button" (click)="closeWindow()" class="btn-close">Đóng</button>
   </div>
 </form>

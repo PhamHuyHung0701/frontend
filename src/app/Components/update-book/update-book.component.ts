@@ -19,6 +19,11 @@ export interface Book {
   // selected: false;
 }
 
+export interface Category {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'app-update-book',
   standalone: true,
@@ -37,6 +42,7 @@ export class UpdateBookComponent {
   idToken: string = '';
 
   api_url: string = '';
+  listCategory: Category[] = [];
 
   book: Book | null = null;
   constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
@@ -79,20 +85,14 @@ export class UpdateBookComponent {
         this.code = response.code;
         this.data = response.object;
         if (this.code === 1) {
-          this.message = response.message; 
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
+          this.message = response.message;
+          alert(this.message);
           this.dialogRef.close();
-          // alert(this.message)
         }
         else {
           this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
+          alert(this.message);
           this.dialogRef.close();
-          // alert(this.message)
         }
       },
       error => {
@@ -129,4 +129,36 @@ export class UpdateBookComponent {
   }
 
 
+  getListCategory() {
+    this.apiUrl = API_URL + 'category';
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    }
+    else {
+      this.idToken = '';
+    }
+
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
+    
+    this.http.get(this.apiUrl, { headers }).subscribe(
+      (response: any) => {
+        this.message = response.message;
+        this.code = response.code;
+        if (this.code === 1) {
+          this.listCategory = response.object;
+        }
+        else {
+          console.log(response.message);
+        }
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    )
+  }
 }

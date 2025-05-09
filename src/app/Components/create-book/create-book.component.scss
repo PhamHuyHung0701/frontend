@@ -94,21 +94,21 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"] {
+.btn-save {
   background-color: #4CAF50;
   color: white;
 }
 
-button[type="submit"]:hover {
+.btn-save:hover {
   background-color: #45a049;
 }
 
-button[type="button"] {
+.btn-close {
   background-color: #f44336;
   color: white;
 }
 
-button[type="button"]:hover {
+.btn-close:hover {
   background-color: #e53935;
 }
 
@@ -145,4 +145,25 @@ button[type="button"]:hover {
   button {
     font-size: 14px;
   }
+}
+
+.custom-select {
+  width: 100%; /* Chiều rộng đầy đủ */
+  padding: 10px; /* Khoảng cách bên trong */
+  font-size: 16px; /* Kích thước chữ */
+  border: 1px solid #ccc; /* Viền */
+  border-radius: 5px; /* Bo góc */
+  background-color: #f9f9f9; /* Màu nền */
+  color: #333; /* Màu chữ */
+  outline: none; /* Xóa viền mặc định khi focus */
+  transition: border-color 0.3s ease; /* Hiệu ứng khi hover hoặc focus */
+}
+
+.custom-select:focus {
+  border-color: #007bff; /* Đổi màu viền khi focus */
+  background-color: #fff; /* Đổi màu nền khi focus */
+}
+
+.custom-select:hover {
+  border-color: #007bff; /* Đổi màu viền khi hover */
 }
