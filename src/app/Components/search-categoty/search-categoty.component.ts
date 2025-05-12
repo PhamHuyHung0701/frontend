@@ -5,17 +5,7 @@ import { API_URL } from '../../app.config';
 import { MenuComponent } from "../menu/menu.component";
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-
-export interface Book {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  author: string;
-  imageUrl: string;
-  description: string;
-  category: string;
-}
+import { Book } from '../../Models/book';
 
 @Component({
   selector: 'app-search-categoty',

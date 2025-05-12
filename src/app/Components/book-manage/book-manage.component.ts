@@ -8,17 +8,7 @@ import { Router } from '@angular/router';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UpdateBookComponent } from '../update-book/update-book.component';
 import { CreateBookComponent } from '../create-book/create-book.component';
-
-export interface Book {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  author: string;
-  imageUrl: string;
-  description: string;
-  category: string;
-}
+import { Book } from '../../Models/book';
 
 @Component({
   selector: 'app-book-manage',

@@ -5,19 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { API_URL } from '../../app.config';
-
-
-export interface Book {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  author: string;
-  imageUrl: string;
-  description: string;
-  category: string;
-  // selected: false;
-}
+import { Book } from '../../Models/book';
 
 export interface Category {
   id: number;

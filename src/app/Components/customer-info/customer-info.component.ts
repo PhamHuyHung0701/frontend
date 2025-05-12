@@ -5,22 +5,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MenuComponent } from '../menu/menu.component';
 import { Router } from '@angular/router';
 import { API_URL } from '../../app.config';
-
-export interface User {
-  id: number;
-  email: string;
-  name: string;
-  address: string;
-}
-
-export interface Bill {
-  id: number;
-  date: string;
-  totalPrice: number;
-  address: string;
-  description: string;
-  phoneNumber: string;
-}
+import { User } from '../../Models/user';
+import { Bill } from '../../Models/bill';
 
 @Component({
   selector: 'app-customer-info',

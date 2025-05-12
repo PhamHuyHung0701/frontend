@@ -5,19 +5,7 @@ import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MenuComponent } from '../menu/menu.component';
-
-
-export interface Book {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  author: string;
-  imageUrl: string;
-  description: string;
-  category: string;
-  selected: false;
-}
+import { Book } from '../../Models/book';
 
 @Component({
   selector: 'app-shop-cart',

@@ -4,6 +4,8 @@ import { Component, Input } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { API_URL } from '../../app.config';
+import { User } from '../../Models/user';
+
 export interface Response {
   object: Data;
   code: number;
@@ -14,13 +16,6 @@ export interface Menu {
   id: number;
   name: string;
   children: Menu[];
-}
-
-export interface User {
-  id: number;
-  email: string;
-  name: string;
-  address: string;
 }
 
 export interface Data {
