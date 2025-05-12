@@ -38,8 +38,8 @@ export class BookManageComponent {
 
   deleteMessage: string = '';
 
-  currentPage = 1; // Trang hiện tại
-  itemsPerPage = 8;
+  currentPage = 1; 
+  itemsPerPage = 10;
   paginatedBooks: Book[] = [];
 
   constructor(private http: HttpClient,

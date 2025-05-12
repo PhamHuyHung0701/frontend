@@ -10,6 +10,10 @@
         <p><strong>Email:</strong> {{ user.email }}</p>
         <p><strong>Địa chỉ:</strong> {{ user.address }}</p>
       </div>
+      <div>
+        <button class="edit-button" (click)="editUser()">Chỉnh sửa thông tin</button>
+        <button class="change-password-button" (click)="changePassword()">Đổi mật khẩu</button>
+      </div>
       <ng-template #noUser>
         <p>Không có thông tin khách hàng.</p>
       </ng-template>

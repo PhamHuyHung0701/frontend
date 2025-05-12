@@ -49,3 +49,35 @@
   table tr:hover {
     background-color: #ddd;
   }
+
+  .edit-button {
+    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+    color: white; /* Màu chữ trắng */
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+}
+
+.edit-button:hover {
+  background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+}
+
+.change-password-button {
+    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+    color: white; /* Màu chữ trắng */
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px;
+}
+
+.change-password-button:hover {
+     background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+}

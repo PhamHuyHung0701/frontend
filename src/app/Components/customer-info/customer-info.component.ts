@@ -78,4 +78,8 @@ export class CustomerInfoComponent {
       }
     )
   }
+
+  editUser() {}
+
+  changePassword() {}
 }
