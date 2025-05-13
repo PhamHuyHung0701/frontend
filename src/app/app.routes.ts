@@ -10,6 +10,7 @@ import { ShopCartComponent } from './Components/shop-cart/shop-cart.component';
 import { PaymentComponent } from './Components/payment/payment.component';
 import { BookManageComponent } from './Components/book-manage/book-manage.component';
 import { CustomerInfoComponent } from './Components/customer-info/customer-info.component';
+import { AccountManageComponent } from './Components/account-manage/account-manage.component';
 
 export const routes: Routes = [
     { path: 'login', component: LoginComponent },
@@ -23,5 +24,6 @@ export const routes: Routes = [
     { path: 'payment', component: PaymentComponent },
     { path: 'bookmanage', component: BookManageComponent },
     { path: 'customerinfo', component: CustomerInfoComponent },
+    { path: 'accountmanage', component: AccountManageComponent },
     { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

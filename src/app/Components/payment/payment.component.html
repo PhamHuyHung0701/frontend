@@ -1,11 +1,5 @@
 <app-menu></app-menu>
 
-<div class="notification" *ngIf="message">
-    <div class="toast" [ngClass]="{'success': code === 1, 'error': code !== 1}">
-      {{ message }}
-    </div>
-</div>
-
 <div class="payment-container">
   <h1>Thanh Toán</h1>
   <div *ngIf="selectedBooks.length > 0; else emptyPayment">

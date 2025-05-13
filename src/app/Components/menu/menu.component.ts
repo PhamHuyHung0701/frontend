@@ -69,6 +69,9 @@ export class MenuComponent {
     if (menu.id === 16) {
       this.router.navigate(['/bookmanage']);
     }
+    if (menu.id === 27) {
+      this.router.navigate(['/accountmanage']);
+    }
   }
   onClickLevel2(event: Event, menu1: Menu, menu2: Menu) {
     if (menu1.id === 1) {

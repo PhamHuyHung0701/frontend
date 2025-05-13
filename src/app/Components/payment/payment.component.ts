@@ -73,8 +73,7 @@ export class PaymentComponent {
           this.router.navigate(['/home']);
         }
         else {
-          this.message = response.message;
-          alert(this.message);
+          alert(response.message);
         }
       },
       error => {
