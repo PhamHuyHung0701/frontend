@@ -1,13 +1,16 @@
 import { Component, Input } from '@angular/core';
 import { MenuComponent } from '../menu/menu.component';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { API_URL } from '../../app.config';
+import { Router } from '@angular/router';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule],
   templateUrl: './change-password.component.html',
   styleUrl: './change-password.component.scss'
 })
@@ -20,16 +23,52 @@ export class ChangePasswordComponent {
       message: string = '';
       data: string = '';
       idToken: string = '';
+      apiUrl: string = '';
 
+      constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>,
+        private http: HttpClient,
+        private router: Router) { }
+      
       changePassword(){
-        const changePassworData = {
+        this.apiUrl = API_URL + 'user/change-password';
+        const tokenData = localStorage.getItem('idToken')?.trim();
+        if (tokenData) {
+          this.idToken = JSON.parse(tokenData);
+        }
+        else {
+          this.idToken = '';
+        }
+        const changePasswordData = {
               oldPassword : this.oldPassword,
               newPassword : this.newPassword,
               confirmPassword : this.confirmPassword
         };
 
+        const language = navigator.language;
+        const headers = new HttpHeaders()
+        .set('Authorization', `Bearer ${this.idToken}`)
+        .set('Accept-Language', language)
+        .set('ngrok-skip-browser-warning', 'true');
         
+        this.http.put(this.apiUrl, changePasswordData, { headers }).subscribe(
+            (response: any) => {
+              this.message = response.message;
+              this.code = response.code;
+              if (this.code === 1) {
+                 alert(this.message);
+                 this.dialogRef.close();
+              }
+              else {
+                alert(this.message);
+              }
+            },
+            error => {
+              console.log("Error: " + error.message);
+            } 
+        )
       }
-
-
+      
+      closeWindow() {
+        this.dialogRef.close();
+      }
 }

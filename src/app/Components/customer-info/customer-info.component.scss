@@ -4,11 +4,44 @@
   }
   
   .customer-details {
-    margin-bottom: 30px;
-    padding: 15px;
+    .form-group {
+      margin-bottom: 15px;
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        color: #555;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+
+        &:focus {
+          border-color: #007bff;
+          outline: none;
+          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+      }
+    }
+  }
+
+  .readonly-input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #e9ecef; 
+    color: #000000; 
+    cursor: not-allowed; 
+    border: 1px solid #ced4da; 
   }
   
   .customer-details h2 {
@@ -59,7 +92,9 @@
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 10px;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .edit-button:hover {

@@ -74,9 +74,7 @@ export class PaymentComponent {
         }
         else {
           this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
+          alert(this.message);
         }
       },
       error => {

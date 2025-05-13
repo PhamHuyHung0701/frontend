@@ -94,21 +94,21 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button[type="submit"] {
+.btn-save {
   background-color: #4CAF50;
   color: white;
 }
 
-button[type="submit"]:hover {
+.btn-save:hover {
   background-color: #45a049;
 }
 
-button[type="button"] {
+.btn-close {
   background-color: #f44336;
   color: white;
 }
 
-button[type="button"]:hover {
+.btn-close:hover {
   background-color: #e53935;
 }
 

@@ -24,15 +24,12 @@ export class UpdateBookComponent {
   code: number = 0;
   message: string = '';
   data: string = '';
-
   apiUrl: string = '';
-
   idToken: string = '';
-
   api_url: string = '';
   listCategory: Category[] = [];
-
   book: Book | null = null;
+
   constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
     public dialogRef: MatDialogRef<UpdateBookComponent>,
     private http: HttpClient,
@@ -40,6 +37,10 @@ export class UpdateBookComponent {
     this.book = dataUpdate.book;
   }
   
+  ngOnInit(){
+    this.getListCategory();
+  }
+
   onSubmit() {
     this.apiUrl = API_URL + 'admin/product';
     const tokenData = localStorage.getItem('idToken')?.trim();

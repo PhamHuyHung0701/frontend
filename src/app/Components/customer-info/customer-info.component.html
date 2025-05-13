@@ -2,50 +2,60 @@
 
 
 <div class="customer-info-container">
-    <!-- Thông tin khách hàng -->
-    <div class="customer-details">
-      <h2>Thông tin khách hàng</h2>
-      <div *ngIf="user; else noUser">
-        <p><strong>Tên:</strong> {{ user.name }}</p>
-        <p><strong>Email:</strong> {{ user.email }}</p>
-        <p><strong>Địa chỉ:</strong> {{ user.address }}</p>
+  <!-- Thông tin khách hàng -->
+  <div class="customer-details">
+    <h2>Thông tin khách hàng</h2>
+    <div *ngIf="user; else noUser">
+      <div class="form-group">
+        <label for="userName"><strong>Tên:</strong></label>
+        <input type="text" id="userName" [(ngModel)]="user.name" class="form-control" placeholder={{user.name}}>
       </div>
-      <div>
-        <button class="edit-button" (click)="editUser()">Chỉnh sửa thông tin</button>
-        <button class="change-password-button" (click)="changePassword()">Đổi mật khẩu</button>
+      <div class="form-group">
+        <label for="userAddress"><strong>Địa chỉ:</strong></label>
+        <input type="text" id="userAddress" [(ngModel)]="user.address" class="form-control"
+          placeholder={{user.address}}>
       </div>
-      <ng-template #noUser>
-        <p>Không có thông tin khách hàng.</p>
-      </ng-template>
+
+      <label for="userEmail"><strong>Email:</strong></label>
+      <input type="email" id="userEmail" [(ngModel)]="user.email" class="form-control readonly-input" readonly
+        placeholder="Email">
     </div>
-  
-    <!-- Bảng thông tin các hóa đơn -->
-    <div class="bills-table">
-      <h2>Danh sách hóa đơn</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Ngày</th>
-            <th>Tổng tiền</th>
-            <th>Địa chỉ</th>
-            <th>Mô tả</th>
-            <th>Số điện thoại</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let bill of bills; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ bill.date }}</td>
-            <td>{{ bill.totalPrice | currency:'VND' }}</td>
-            <td>{{ bill.address }}</td>
-            <td>{{ bill.description }}</td>
-            <td>{{ bill.phoneNumber }}</td>
-          </tr>
-          <tr *ngIf="bills.length === 0">
-            <td colspan="6">Không có hóa đơn nào.</td>
-          </tr>
-        </tbody>
-      </table>
+    <div>
+      <button class="edit-button" (click)="editUser()">Lưu thông tin</button>
+      <button class="change-password-button" (click)="changePassword()">Đổi mật khẩu</button>
     </div>
+    <ng-template #noUser>
+      <p>Không có thông tin khách hàng.</p>
+    </ng-template>
   </div>
+
+  <!-- Bảng thông tin các hóa đơn -->
+  <div class="bills-table">
+    <h2>Danh sách hóa đơn</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Ngày</th>
+          <th>Tổng tiền</th>
+          <th>Địa chỉ</th>
+          <th>Mô tả</th>
+          <th>Số điện thoại</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bill of bills; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ bill.date }}</td>
+          <td>{{ bill.totalPrice | currency:'VND' }}</td>
+          <td>{{ bill.address }}</td>
+          <td>{{ bill.description }}</td>
+          <td>{{ bill.phoneNumber }}</td>
+        </tr>
+        <tr *ngIf="bills.length === 0">
+          <td colspan="6">Không có hóa đơn nào.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
