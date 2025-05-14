@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
-import { MenuComponent } from '../menu/menu.component';
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { API_URL } from '../../app.config';
-import { Router } from '@angular/router';
-import { MatDialogRef } from '@angular/material/dialog';
+import {Component, Input} from '@angular/core';
+import {MenuComponent} from '../menu/menu.component';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {API_URL} from '../../app.config';
+import {Router} from '@angular/router';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-change-password',
@@ -26,16 +26,16 @@ export class ChangePasswordComponent {
   apiUrl: string = '';
 
   constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>,
-    private http: HttpClient,
-    private router: Router) { }
+              private http: HttpClient,
+              private router: Router) {
+  }
 
   changePassword() {
     this.apiUrl = API_URL + 'user/change-password';
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const changePasswordData = {
@@ -50,15 +50,14 @@ export class ChangePasswordComponent {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, changePasswordData, { headers }).subscribe(
+    this.http.put(this.apiUrl, changePasswordData, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
         if (this.code === 1) {
           alert(this.message);
           this.dialogRef.close();
-        }
-        else {
+        } else {
           alert(this.message);
         }
       },

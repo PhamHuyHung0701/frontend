@@ -1,14 +1,14 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { API_URL } from '../../app.config';
-import { MenuComponent } from '../menu/menu.component';
-import { Router } from '@angular/router';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { UpdateBookComponent } from '../update-book/update-book.component';
-import { CreateBookComponent } from '../create-book/create-book.component';
-import { Book } from '../../Models/book';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {API_URL} from '../../app.config';
+import {MenuComponent} from '../menu/menu.component';
+import {Router} from '@angular/router';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {UpdateBookComponent} from '../update-book/update-book.component';
+import {CreateBookComponent} from '../create-book/create-book.component';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-book-manage',
@@ -33,8 +33,9 @@ export class BookManageComponent {
   paginatedBooks: Book[] = [];
 
   constructor(private http: HttpClient,
-    private router: Router,
-    private dialog: MatDialog) { }
+              private router: Router,
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.getBooks();
@@ -46,8 +47,7 @@ export class BookManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
 
@@ -57,7 +57,7 @@ export class BookManageComponent {
       .set('Accept-Language', language)
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, { headers }).subscribe(
+    this.http.get(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -139,8 +139,7 @@ export class BookManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -149,7 +148,7 @@ export class BookManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.delete(this.apiUrl, { headers }).subscribe(
+    this.http.delete(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.deleteMessage = response.message;
         this.code = response.code;
@@ -171,14 +170,16 @@ export class BookManageComponent {
       }
     );
   }
+
   editBook(book: Book) {
     localStorage.setItem('bookUpdate', JSON.stringify(book));
     const dialogRef = this.dialog.open(UpdateBookComponent, {
       width: '40%',
       height: '70%',
-      data: { book }
+      data: {book}
     });
   }
+
   addNewBook() {
     const dialogRef = this.dialog.open(CreateBookComponent, {
       width: '40%',
@@ -187,6 +188,7 @@ export class BookManageComponent {
   }
 
   searchText: string = '';
+
   searchBook() {
     this.apiUrl = API_URL + 'product';
     const language = navigator.language;
@@ -195,7 +197,7 @@ export class BookManageComponent {
       .set('ngrok-skip-browser-warning', 'true');
     const params = new HttpParams().set('name', this.searchText);
 
-    this.http.get(this.apiUrl, { headers, params }).subscribe(
+    this.http.get(this.apiUrl, {headers, params}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MenuComponent } from '../menu/menu.component';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
-import { Book } from '../../Models/book';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MenuComponent} from '../menu/menu.component';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-bookinfo',
@@ -23,9 +23,12 @@ export class BookinfoComponent {
   apiUrl: string = '';
 
   idToken: string = '';
-  constructor(private http: HttpClient, private router: Router) { }
+
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   book: Book | null = null;
+
   ngOnInit() {
     const bookData = localStorage.getItem('book');
     if (bookData) {
@@ -38,8 +41,7 @@ export class BookinfoComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
 
@@ -51,7 +53,7 @@ export class BookinfoComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, loginData, { headers }).subscribe(
+    this.http.post(this.apiUrl, loginData, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -61,8 +63,7 @@ export class BookinfoComponent {
           setTimeout(() => {
             this.message = '';
           }, 3000);
-        }
-        else {
+        } else {
           this.message = response.message;
           setTimeout(() => {
             this.message = '';

@@ -1,11 +1,11 @@
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
-import { MenuComponent } from "../menu/menu.component";
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Book } from '../../Models/book';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
+import {MenuComponent} from "../menu/menu.component";
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-search-categoty',
@@ -26,7 +26,8 @@ export class SearchCategotyComponent {
   itemsPerPage = 8; // Số sách trên mỗi trang
   paginatedBooks: Book[] = []; // Danh sách sách hiển thị trên trang hiện tại
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   ngOnInit() {
     this.apiUrl = API_URL + 'product/category';
@@ -40,7 +41,7 @@ export class SearchCategotyComponent {
     }
     const params = new HttpParams().set('categoryName', this.searchText);
 
-    this.http.get(this.apiUrl, { headers, params }).subscribe(
+    this.http.get(this.apiUrl, {headers, params}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

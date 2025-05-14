@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MenuComponent } from '../menu/menu.component';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
-import { Book } from '../../Models/book';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Component, Input} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MenuComponent} from '../menu/menu.component';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-payment',
@@ -27,7 +27,8 @@ export class PaymentComponent {
   idToken: string = '';
   notificationMessage: string = '';
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   ngOnInit() {
     const selectedBooksData = localStorage.getItem('selectedBooks')?.trim();
@@ -45,8 +46,7 @@ export class PaymentComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
 
@@ -63,7 +63,7 @@ export class PaymentComponent {
       .set('Accept-Language', language)
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, data, { headers }).subscribe(
+    this.http.post(this.apiUrl, data, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -71,8 +71,7 @@ export class PaymentComponent {
         if (this.code === 1) {
           alert(response.message);
           this.router.navigate(['/home']);
-        }
-        else {
+        } else {
           alert(response.message);
         }
       },

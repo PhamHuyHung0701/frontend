@@ -1,258 +1,258 @@
 /* Thanh menu ngang */
 .menu-bar {
-    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
-    padding: 20px 0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    backdrop-filter: blur(10px);
-    /* Hiệu ứng mờ */
-    transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+  padding: 20px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+  /* Hiệu ứng mờ */
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 
-    &:hover {
-        background: linear-gradient(135deg, #00d2d3, #ff9ff3);
-        backdrop-filter: blur(15px);
-        /* Tăng hiệu ứng mờ khi hover */
-    }
+  &:hover {
+    background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+    backdrop-filter: blur(15px);
+    /* Tăng hiệu ứng mờ khi hover */
+  }
 }
 
 .menu-horizontal {
-    display: flex;
-    /* Đảm bảo logo và các mục menu nằm ngang */
-    align-items: center;
+  display: flex;
+  /* Đảm bảo logo và các mục menu nằm ngang */
+  align-items: center;
 }
 
 /* Menu chính */
 .menu-ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 0;
-    padding: 0 30px;
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0 30px;
 }
 
 .menu-item {
-    display: flex;
-    position: relative;
-    margin: 0 25px;
-    padding: 14px 24px;
-    color: #ffffff;
-    font-weight: bold;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-    /* Bo góc mềm mại hơn */
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  display: flex;
+  position: relative;
+  margin: 0 25px;
+  padding: 14px 24px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  /* Bo góc mềm mại hơn */
+  text-transform: uppercase;
+  letter-spacing: 1px;
 
-    &:hover {
-        background: linear-gradient(135deg, #00d2d3, #ff9ff3);
-        color: #ffffff;
-        transform: translateY(-5px);
-        /* Hiệu ứng nổi bật hơn */
-        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    }
+  &:hover {
+    background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+    color: #ffffff;
+    transform: translateY(-5px);
+    /* Hiệu ứng nổi bật hơn */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* Submenu cấp 1 */
 .submenu {
-    list-style: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
-    padding: 12px 0;
-    margin: 0;
-    display: none;
-    /* Ẩn submenu mặc định */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateY(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  list-style: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+  padding: 12px 0;
+  margin: 0;
+  display: none;
+  /* Ẩn submenu mặc định */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Hiển thị submenu khi hover vào phần tử cha */
-.menu-item:hover>.submenu {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
+.menu-item:hover > .submenu {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Submenu cấp 2 (subsubmenu) */
 .subsubmenu {
-    list-style: none;
-    position: absolute;
-    top: 0;
-    left: 100%;
-    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
-    padding: 12px 0;
-    margin: 0;
-    display: none;
-    /* Ẩn subsubmenu mặc định */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
-    border-radius: 12px;
-    z-index: 1000;
-    opacity: 0;
-    transform: translateX(10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+  list-style: none;
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+  padding: 12px 0;
+  margin: 0;
+  display: none;
+  /* Ẩn subsubmenu mặc định */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  z-index: 1000;
+  opacity: 0;
+  transform: translateX(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Hiển thị subsubmenu khi hover vào phần tử cha */
-.submenu-item:hover>.subsubmenu {
-    display: block;
-    opacity: 1;
-    transform: translateX(0);
+.submenu-item:hover > .subsubmenu {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
 }
 
 /* Các mục trong submenu */
 .submenu-item {
-    display: flex;
-    position: relative;
-    padding: 12px 24px;
-    color: #ffffff;
-    white-space: nowrap;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-    font-size: 16px;
+  display: flex;
+  position: relative;
+  padding: 12px 24px;
+  color: #ffffff;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  font-size: 16px;
 
-    &:hover {
-        background: linear-gradient(135deg, #00d2d3, #ff9ff3);
-        color: #ffffff;
-        transform: translateX(5px);
-        /* Hiệu ứng trượt nhẹ khi hover */
-    }
+  &:hover {
+    background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+    color: #ffffff;
+    transform: translateX(5px);
+    /* Hiệu ứng trượt nhẹ khi hover */
+  }
 }
 
 /* Các mục trong subsubmenu */
 .subsubmenu-item {
-    padding: 12px 24px;
-    color: #ffffff;
-    white-space: nowrap;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  padding: 12px 24px;
+  color: #ffffff;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
 
-    &:hover {
-        background: linear-gradient(135deg, #00d2d3, #ff9ff3);
-        color: #ffffff;
-        transform: translateX(5px);
-        /* Hiệu ứng trượt nhẹ khi hover */
-    }
+  &:hover {
+    background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+    color: #ffffff;
+    transform: translateX(5px);
+    /* Hiệu ứng trượt nhẹ khi hover */
+  }
 }
 
 /* Menu log */
 .menu-log {
-    display: flex;
-    gap: 25px;
-    pointer-events: auto;
-    align-items: center;
+  display: flex;
+  gap: 25px;
+  pointer-events: auto;
+  align-items: center;
 }
 
 .menu-log-item {
+  color: #ffffff;
+  font-weight: bold;
+  text-decoration: none;
+  padding: 14px 20px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    background: linear-gradient(135deg, #00d2d3, #ff9ff3);
     color: #ffffff;
-    font-weight: bold;
-    text-decoration: none;
-    padding: 14px 20px;
-    border: 1px solid transparent;
-    border-radius: 12px;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    border-color: #ffffff;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+  }
 
-    &:hover {
-        background: linear-gradient(135deg, #00d2d3, #ff9ff3);
-        color: #ffffff;
-        border-color: #ffffff;
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-        transform: translateY(-3px);
-    }
-
-    &:active {
-        transform: translateY(0);
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-    }
+  &:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* Ảnh trong menu */
 .menu-image {
-    width: 50px;
-    height: 50px;
-    object-fit: cover;
-    border-radius: 50%;
-    border: 3px solid #ffffff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 
-    &:hover {
-        transform: scale(1.2);
-        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    }
+  &:hover {
+    transform: scale(1.2);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
 }
 
 /* Form tìm kiếm */
 .search-form {
-    margin-right: 150px;
+  margin-right: 150px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-left: auto;
+  /* Đẩy toàn bộ ô tìm kiếm sang phải */
+
+  .input-group {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-left: auto;
-    /* Đẩy toàn bộ ô tìm kiếm sang phải */
+    flex: 1;
+    position: relative;
+  }
 
-    .input-group {
-        display: flex;
-        align-items: center;
-        flex: 1;
-        position: relative;
+  input[type="text"] {
+    width: 100%;
+    padding: 12px 50px 12px 15px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      border-color: #00d2d3;
+      box-shadow: 0 0 8px rgba(0, 210, 211, 0.5);
+      outline: none;
+    }
+  }
+
+  .search-button {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-60%) scale(1.1);
+      /* Nổi nhẹ hơn khi hover */
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
+      /* Tăng bóng khi hover */
     }
 
-    input[type="text"] {
-        width: 100%;
-        padding: 12px 50px 12px 15px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 12px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-
-        &:focus {
-            border-color: #00d2d3;
-            box-shadow: 0 0 8px rgba(0, 210, 211, 0.5);
-            outline: none;
-        }
+    &:active {
+      transform: scale(0.9) translateY(-60%);
+      /* Giữ nguyên kích thước khi nhấn */
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      /* Giữ bóng như ban đầu */
     }
 
-    .search-button {
-        position: absolute;
-        right: 10px;
-        top: 50%;
-        transform: translateY(-50%);
-        background: linear-gradient(135deg, #00d2d3, #ff9ff3);
-        border: none;
-        border-radius: 50%;
-        width: 40px;
-        height: 40px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-        &:hover {
-            transform: translateY(-60%) scale(1.1);
-            /* Nổi nhẹ hơn khi hover */
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-            /* Tăng bóng khi hover */
-        }
-
-        &:active {
-            transform: scale(0.9) translateY(-60%);
-            /* Giữ nguyên kích thước khi nhấn */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            /* Giữ bóng như ban đầu */
-        }
-
-        .search-icon {
-            width: 20px;
-            height: 20px;
-        }
+    .search-icon {
+      width: 20px;
+      height: 20px;
     }
+  }
 }

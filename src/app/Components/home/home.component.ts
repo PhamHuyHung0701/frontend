@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MenuComponent } from "../menu/menu.component";
-import { API_URL } from '../../app.config';
-import { Router } from '@angular/router';
-import { Book } from '../../Models/book';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MenuComponent} from "../menu/menu.component";
+import {API_URL} from '../../app.config';
+import {Router} from '@angular/router';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-home',
@@ -29,7 +29,8 @@ export class HomeComponent {
     'assets/banner3.jpg'
   ];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   nextImage() {
     this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
@@ -52,7 +53,7 @@ export class HomeComponent {
     this.apiUrl = API_URL + 'product/home';
     const language = navigator.language;
     const headers = new HttpHeaders().set('Accept-Language', language).set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, { headers }).subscribe(
+    this.http.get(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

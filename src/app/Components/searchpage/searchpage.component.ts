@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MenuComponent } from '../menu/menu.component';
-import { API_URL } from '../../app.config';
-import { Router } from '@angular/router';
-import { Book } from '../../Models/book';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MenuComponent} from '../menu/menu.component';
+import {API_URL} from '../../app.config';
+import {Router} from '@angular/router';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-searchpage',
@@ -26,7 +26,8 @@ export class SearchpageComponent {
   itemsPerPage = 8; // Số sách trên mỗi trang
   paginatedBooks: Book[] = []; // Danh sách sách hiển thị trên trang hiện tại
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   ngOnInit() {
     this.apiUrl = API_URL + 'product';
@@ -40,7 +41,7 @@ export class SearchpageComponent {
     }
     const params = new HttpParams().set('name', this.searchText);
 
-    this.http.get(this.apiUrl, { headers, params }).subscribe(
+    this.http.get(this.apiUrl, {headers, params}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

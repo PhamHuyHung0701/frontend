@@ -1,9 +1,9 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Component, Input} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +24,8 @@ export class RegisterComponent {
   data: any;
 
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   onSubmit() {
     const loginData = {
@@ -38,7 +39,7 @@ export class RegisterComponent {
     console.log(this.email);
     const language = navigator.language;
     const headers = new HttpHeaders().set('Accept-Language', language);
-    this.http.post(this.apiUrl, loginData, { headers }).subscribe(
+    this.http.post(this.apiUrl, loginData, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -46,8 +47,7 @@ export class RegisterComponent {
         if (this.code === 1) {
           alert(response.message);
           this.router.navigate(['/login']);
-        }
-        else {
+        } else {
           alert(response.message);
         }
       },

@@ -5,24 +5,24 @@
   <div *ngIf="selectedBooks.length > 0; else emptyPayment">
     <table class="payment-table">
       <thead>
-        <tr>
-          <th>Hình ảnh</th>
-          <th>Tên sách</th>
-          <th>Tác giả</th>
-          <th>Giá</th>
-          <th>Số lượng</th>
-          <th>Tổng</th>
-        </tr>
+      <tr>
+        <th>Hình ảnh</th>
+        <th>Tên sách</th>
+        <th>Tác giả</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Tổng</th>
+      </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of selectedBooks">
-          <td><img [src]="book.imageUrl" [alt]="book.name" class="book-image" /></td>
-          <td>{{ book.name }}</td>
-          <td>{{ book.author }}</td>
-          <td>{{ book.price | currency: 'VND' }}</td>
-          <td>{{ book.quantity }}</td>
-          <td>{{ book.price * book.quantity | currency: 'VND' }}</td>
-        </tr>
+      <tr *ngFor="let book of selectedBooks">
+        <td><img [src]="book.imageUrl" [alt]="book.name" class="book-image"/></td>
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price | currency: 'VND' }}</td>
+        <td>{{ book.quantity }}</td>
+        <td>{{ book.price * book.quantity | currency: 'VND' }}</td>
+      </tr>
       </tbody>
     </table>
     <div class="payment-summary">
@@ -32,10 +32,10 @@
       <h2>Thông tin thanh toán</h2>
       <form>
         <label for="address">Địa chỉ:</label>
-        <input type="text" id="address" [(ngModel)]="address" name="address" placeholder="Nhập địa chỉ của bạn" />
+        <input type="text" id="address" [(ngModel)]="address" name="address" placeholder="Nhập địa chỉ của bạn"/>
 
         <label for="phone">Số điện thoại:</label>
-        <input type="text" id="phone" [(ngModel)]="phone" name="phone" placeholder="Nhập số điện thoại của bạn" />
+        <input type="text" id="phone" [(ngModel)]="phone" name="phone" placeholder="Nhập số điện thoại của bạn"/>
 
         <button type="button" (click)="submitPayment()">Thanh Toán</button>
       </form>

@@ -12,7 +12,7 @@
 
   <form class="search-form" (ngSubmit)="searchBook()" #loginForm="ngForm">
     <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText" placeholder="Nhập từ khóa tìm kiếm"
-      required />
+           required/>
     <button type="submit">Tìm kiếm</button>
   </form>
 
@@ -22,35 +22,35 @@
 
   <table class="book-table">
     <thead>
-      <tr>
-        <th>#</th>
-        <th>Tên sách</th>
-        <th>Tác giả</th>
-        <th>Giá</th>
-        <th>Số lượng</th>
-        <th>Thể loại</th>
-        <th>Hình ảnh</th>
-        <th>Mô tả</th>
-        <th></th>
-      </tr>
+    <tr>
+      <th>#</th>
+      <th>Tên sách</th>
+      <th>Tác giả</th>
+      <th>Giá</th>
+      <th>Số lượng</th>
+      <th>Thể loại</th>
+      <th>Hình ảnh</th>
+      <th>Mô tả</th>
+      <th></th>
+    </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let book of paginatedBooks; let i = index">
-        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-        <td>{{ book.name }}</td>
-        <td>{{ book.author }}</td>
-        <td>{{ book.price | currency:'VND' }}</td>
-        <td>{{ book.quantity }}</td>
-        <td>{{ book.category }}</td>
-        <td>
-          <img [src]="book.imageUrl" alt="{{ book.name }}" class="book-image" />
-        </td>
-        <td>{{ book.description }}</td>
-        <td>
-          <button (click)="editBook(book)">Sửa</button>
-          <button (click)="deleteBook(book.id)">Xóa</button>
-        </td>
-      </tr>
+    <tr *ngFor="let book of paginatedBooks; let i = index">
+      <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+      <td>{{ book.name }}</td>
+      <td>{{ book.author }}</td>
+      <td>{{ book.price | currency:'VND' }}</td>
+      <td>{{ book.quantity }}</td>
+      <td>{{ book.category }}</td>
+      <td>
+        <img [src]="book.imageUrl" alt="{{ book.name }}" class="book-image"/>
+      </td>
+      <td>{{ book.description }}</td>
+      <td>
+        <button (click)="editBook(book)">Sửa</button>
+        <button (click)="deleteBook(book.id)">Xóa</button>
+      </td>
+    </tr>
     </tbody>
   </table>
 

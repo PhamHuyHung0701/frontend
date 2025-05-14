@@ -1,70 +1,70 @@
 <div class="menu-bar">
 
-    <ul class="menu-ul">
+  <ul class="menu-ul">
 
-        <div class="menu-horizontal">
-            <li>
-                <a href="http://localhost:4200/home" class="menu-image-link">
-                    <img src="https://th.bing.com/th/id/OIP.QYKIrzN0OBmLXhJ8xfp-1AAAAA?rs=1&pid=ImgDetMain" alt="Logo"
-                        class="menu-image">
-                </a>
-            </li>
-            <ng-container *ngFor="let item of menu">
+    <div class="menu-horizontal">
+      <li>
+        <a href="http://localhost:4200/home" class="menu-image-link">
+          <img src="https://th.bing.com/th/id/OIP.QYKIrzN0OBmLXhJ8xfp-1AAAAA?rs=1&pid=ImgDetMain" alt="Logo"
+               class="menu-image">
+        </a>
+      </li>
+      <ng-container *ngFor="let item of menu">
 
-                <li class="menu-item" (click)="onClickLevel1(item)">
-                    <span>{{ item.name }}</span>
-                    <ul class="submenu" *ngIf="item.children && item.children.length > 0">
-                        <div class="submenu-columns">
-                            <ng-container *ngFor="let child of item.children; let i = index">
-                                <div class="submenu-column" *ngIf="i % 10 === 0">
-                                    <ng-container *ngFor="let columnChild of item.children.slice(i, i + 10)">
-                                        <li class="submenu-item" (click)="onClickLevel2($event,item,columnChild)">
-                                            <span>{{ columnChild.name }}</span>
-                                            <ul class="subsubmenu"
-                                                *ngIf="columnChild.children && columnChild.children.length > 0">
-                                                <ng-container *ngFor="let subChild of columnChild.children">
-                                                    <li class="subsubmenu-item"
-                                                        (click)="onClickLevel3($event,item,columnChild,subChild)">
-                                                        <span>{{ subChild.name }}</span>
-                                                    </li>
-                                                </ng-container>
-                                            </ul>
-                                        </li>
-                                    </ng-container>
-                                </div>
-                            </ng-container>
-                        </div>
-                    </ul>
-                </li>
-            </ng-container>
-        </div>
-
-        <form (ngSubmit)="onSearch()" #loginForm="ngForm" class="search-form">
-            <div class="input-group">
-                <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText"
-                    placeholder="Bạn muốn mua gì?" required />
-                <button type="submit" class="search-button">
-                    <img src="assets/search.png" alt="Search" class="search-icon" />
-                </button>
+        <li class="menu-item" (click)="onClickLevel1(item)">
+          <span>{{ item.name }}</span>
+          <ul class="submenu" *ngIf="item.children && item.children.length > 0">
+            <div class="submenu-columns">
+              <ng-container *ngFor="let child of item.children; let i = index">
+                <div class="submenu-column" *ngIf="i % 10 === 0">
+                  <ng-container *ngFor="let columnChild of item.children.slice(i, i + 10)">
+                    <li class="submenu-item" (click)="onClickLevel2($event,item,columnChild)">
+                      <span>{{ columnChild.name }}</span>
+                      <ul class="subsubmenu"
+                          *ngIf="columnChild.children && columnChild.children.length > 0">
+                        <ng-container *ngFor="let subChild of columnChild.children">
+                          <li class="subsubmenu-item"
+                              (click)="onClickLevel3($event,item,columnChild,subChild)">
+                            <span>{{ subChild.name }}</span>
+                          </li>
+                        </ng-container>
+                      </ul>
+                    </li>
+                  </ng-container>
+                </div>
+              </ng-container>
             </div>
-        </form>
-
-        <li class="menu-item" *ngIf="isLoggedIn()">
-            <a href="http://localhost:4200/shopcart" class="menu-log-item-link">
-                <img src="assets/icons8-shopping-basket-48.png" alt="Logo" class="menu-image">
-            </a>
-            <a href="http://localhost:4200/customerinfo" class="menu-log-item-link">
-                <img src="assets/icons8-account-48.png" alt="Logo" class="menu-image">
-            </a>
-            <a (click)="onLogOut()" class="menu-log-item-link">
-                <img src="assets/logout (1).png" alt="Logo" class="menu-image">
-            </a>
+          </ul>
         </li>
+      </ng-container>
+    </div>
 
-        <li class="menu-item" *ngIf="!isLoggedIn()">
-            <a href="http://localhost:4200/login" class="menu-log-item-link">
-                <img src="assets/icons8-account-48.png" alt="Logo" class="menu-image">
-            </a>
-        </li>
-    </ul>
+    <form (ngSubmit)="onSearch()" #loginForm="ngForm" class="search-form">
+      <div class="input-group">
+        <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText"
+               placeholder="Bạn muốn mua gì?" required/>
+        <button type="submit" class="search-button">
+          <img src="assets/search.png" alt="Search" class="search-icon"/>
+        </button>
+      </div>
+    </form>
+
+    <li class="menu-item" *ngIf="isLoggedIn()">
+      <a href="http://localhost:4200/shopcart" class="menu-log-item-link">
+        <img src="assets/icons8-shopping-basket-48.png" alt="Logo" class="menu-image">
+      </a>
+      <a href="http://localhost:4200/customerinfo" class="menu-log-item-link">
+        <img src="assets/icons8-account-48.png" alt="Logo" class="menu-image">
+      </a>
+      <a (click)="onLogOut()" class="menu-log-item-link">
+        <img src="assets/logout (1).png" alt="Logo" class="menu-image">
+      </a>
+    </li>
+
+    <li class="menu-item" *ngIf="!isLoggedIn()">
+      <a href="http://localhost:4200/login" class="menu-log-item-link">
+        <img src="assets/icons8-account-48.png" alt="Logo" class="menu-image">
+      </a>
+    </li>
+  </ul>
 </div>

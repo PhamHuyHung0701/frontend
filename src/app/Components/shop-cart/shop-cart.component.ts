@@ -1,11 +1,11 @@
-import { HttpClient, HttpClientModule, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Component } from '@angular/core';
-import { API_URL } from '../../app.config';
-import { Router } from '@angular/router';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MenuComponent } from '../menu/menu.component';
-import { Book } from '../../Models/book';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+import {Component} from '@angular/core';
+import {API_URL} from '../../app.config';
+import {Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MenuComponent} from '../menu/menu.component';
+import {Book} from '../../Models/book';
 
 @Component({
   selector: 'app-shop-cart',
@@ -22,14 +22,14 @@ export class ShopCartComponent {
   apiUrl: string = '';
   selectedBooks: Book[] = [];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   ngOnInit() {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -39,14 +39,13 @@ export class ShopCartComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, { headers }).subscribe(
+    this.http.get(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
         if (this.code === 1) {
           this.data = response.object;
-        }
-        else {
+        } else {
           console.log(response.message);
         }
       },
@@ -70,8 +69,7 @@ export class ShopCartComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -82,14 +80,13 @@ export class ShopCartComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-    this.http.delete(this.apiUrl, { headers }).subscribe(
+    this.http.delete(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
         if (this.code === 1) {
           window.location.reload();
-        }
-        else {
+        } else {
           console.log(response.message);
         }
       },

@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SearchErrorComponent } from './search-error.component';
+import {SearchErrorComponent} from './search-error.component';
 
 describe('SearchErrorComponent', () => {
   let component: SearchErrorComponent;

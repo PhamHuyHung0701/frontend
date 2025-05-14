@@ -1,11 +1,11 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component, Inject } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
-import { Book } from '../../Models/book';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Component, Inject} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
+import {Book} from '../../Models/book';
 
 export interface Category {
   id: number;
@@ -31,9 +31,9 @@ export class UpdateBookComponent {
   book: Book | null = null;
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
-    public dialogRef: MatDialogRef<UpdateBookComponent>,
-    private http: HttpClient,
-    private router: Router) {
+              public dialogRef: MatDialogRef<UpdateBookComponent>,
+              private http: HttpClient,
+              private router: Router) {
     this.book = dataUpdate.book;
   }
 
@@ -46,8 +46,7 @@ export class UpdateBookComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
 
@@ -68,7 +67,7 @@ export class UpdateBookComponent {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, dataSubmit, { headers }).subscribe(
+    this.http.put(this.apiUrl, dataSubmit, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -77,8 +76,7 @@ export class UpdateBookComponent {
           this.message = response.message;
           alert(this.message);
           this.dialogRef.close();
-        }
-        else {
+        } else {
           this.message = response.message;
           alert(this.message);
           this.dialogRef.close();
@@ -123,8 +121,7 @@ export class UpdateBookComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
 
@@ -134,14 +131,13 @@ export class UpdateBookComponent {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.get(this.apiUrl, { headers }).subscribe(
+    this.http.get(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
         if (this.code === 1) {
           this.listCategory = response.object;
-        }
-        else {
+        } else {
           console.log(response.message);
         }
       },

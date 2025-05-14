@@ -1,10 +1,10 @@
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
-import { User } from '../../Models/user';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {Component, Input} from '@angular/core';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
+import {User} from '../../Models/user';
 
 export interface Response {
   object: Data;
@@ -24,6 +24,7 @@ export interface Data {
   user: User;
   menu: Menu[];
 }
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -44,7 +45,8 @@ export class LoginComponent {
   user: User | null = null;
   menu: Menu[] = [];
 
-  constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) {
+  }
 
   onSubmit() {
     const loginData = {
@@ -53,7 +55,7 @@ export class LoginComponent {
     };
     const language = navigator.language;
     const headers = new HttpHeaders().set('Accept-Language', language).set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, loginData, { headers }).subscribe(
+    this.http.post(this.apiUrl, loginData, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -69,8 +71,7 @@ export class LoginComponent {
           localStorage.setItem('menu', JSON.stringify(this.menu));
           localStorage.setItem('roles', JSON.stringify(this.roles));
           this.router.navigate(['/home']);
-        }
-        else {
+        } else {
           alert(response.message);
         }
       },

@@ -1,13 +1,13 @@
-import { Component } from '@angular/core';
-import { MenuComponent } from '../menu/menu.component';
-import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { User } from '../../Models/user';
-import { Router } from '@angular/router';
-import { API_URL } from '../../app.config';
-import { NgxPaginationModule } from 'ngx-pagination';
+import {Component} from '@angular/core';
+import {MenuComponent} from '../menu/menu.component';
+import {CommonModule} from '@angular/common';
+import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {ReactiveFormsModule, FormsModule} from '@angular/forms';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import {User} from '../../Models/user';
+import {Router} from '@angular/router';
+import {API_URL} from '../../app.config';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
   selector: 'app-account-manage',
@@ -28,8 +28,9 @@ export class AccountManageComponent {
   paginatedUsers: User[] = [];
 
   constructor(private http: HttpClient,
-    private router: Router,
-    private dialog: MatDialog) { }
+              private router: Router,
+              private dialog: MatDialog) {
+  }
 
   ngOnInit() {
     this.getAllUser();
@@ -39,8 +40,7 @@ export class AccountManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
 
@@ -50,7 +50,7 @@ export class AccountManageComponent {
       .set('Accept-Language', language)
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, { headers }).subscribe(
+    this.http.get(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -73,8 +73,7 @@ export class AccountManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -83,7 +82,7 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, { headers }).subscribe(
+    this.http.put(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -104,8 +103,7 @@ export class AccountManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -114,7 +112,7 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, { headers }).subscribe(
+    this.http.put(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -135,8 +133,7 @@ export class AccountManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -145,7 +142,7 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, { headers }).subscribe(
+    this.http.put(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -167,8 +164,7 @@ export class AccountManageComponent {
     const tokenData = localStorage.getItem('idToken')?.trim();
     if (tokenData) {
       this.idToken = JSON.parse(tokenData);
-    }
-    else {
+    } else {
       this.idToken = '';
     }
     const language = navigator.language;
@@ -177,7 +173,7 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.delete(this.apiUrl, { headers }).subscribe(
+    this.http.delete(this.apiUrl, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
