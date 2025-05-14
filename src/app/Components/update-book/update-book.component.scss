@@ -1,7 +1,8 @@
 /* General styling */
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f3f4f6; /* Màu nền nhẹ nhàng */
+  background-color: #f3f4f6;
+  /* Màu nền nhẹ nhàng */
   margin: 0;
   padding: 0;
   display: flex;
@@ -146,23 +147,36 @@ button {
     font-size: 14px;
   }
 }
+
 .custom-select {
-  width: 100%; /* Chiều rộng đầy đủ */
-  padding: 10px; /* Khoảng cách bên trong */
-  font-size: 16px; /* Kích thước chữ */
-  border: 1px solid #ccc; /* Viền */
-  border-radius: 5px; /* Bo góc */
-  background-color: #f9f9f9; /* Màu nền */
-  color: #333; /* Màu chữ */
-  outline: none; /* Xóa viền mặc định khi focus */
-  transition: border-color 0.3s ease; /* Hiệu ứng khi hover hoặc focus */
+  width: 100%;
+  /* Chiều rộng đầy đủ */
+  padding: 10px;
+  /* Khoảng cách bên trong */
+  font-size: 16px;
+  /* Kích thước chữ */
+  border: 1px solid #ccc;
+  /* Viền */
+  border-radius: 5px;
+  /* Bo góc */
+  background-color: #f9f9f9;
+  /* Màu nền */
+  color: #333;
+  /* Màu chữ */
+  outline: none;
+  /* Xóa viền mặc định khi focus */
+  transition: border-color 0.3s ease;
+  /* Hiệu ứng khi hover hoặc focus */
 }
 
 .custom-select:focus {
-  border-color: #007bff; /* Đổi màu viền khi focus */
-  background-color: #fff; /* Đổi màu nền khi focus */
+  border-color: #007bff;
+  /* Đổi màu viền khi focus */
+  background-color: #fff;
+  /* Đổi màu nền khi focus */
 }
 
 .custom-select:hover {
-  border-color: #007bff; /* Đổi màu viền khi hover */
+  border-color: #007bff;
+  /* Đổi màu viền khi hover */
 }

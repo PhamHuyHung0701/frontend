@@ -8,59 +8,58 @@
 </div>
 
 <div class="book-manage-container">
-    <h1>Danh sách sách</h1>
+  <h1>Danh sách sách</h1>
 
-    <form class="search-form" (ngSubmit)="searchBook()" #loginForm="ngForm">
-      <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText" placeholder="Nhập từ khóa tìm kiếm" required />
-      <button type="submit">Tìm kiếm</button>
-    </form>
+  <form class="search-form" (ngSubmit)="searchBook()" #loginForm="ngForm">
+    <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText" placeholder="Nhập từ khóa tìm kiếm"
+      required />
+    <button type="submit">Tìm kiếm</button>
+  </form>
 
-    <div class="add-book-button">
-      <button (click)="addNewBook()">Thêm mới sách</button>
-    </div>
-    
-    <table class="book-table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Tên sách</th>
-          <th>Tác giả</th>
-          <th>Giá</th>
-          <th>Số lượng</th>
-          <th>Thể loại</th>
-          <th>Hình ảnh</th>
-          <th>Mô tả</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let book of paginatedBooks; let i = index">
-          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>{{ book.name }}</td>
-          <td>{{ book.author }}</td>
-          <td>{{ book.price | currency:'VND' }}</td>
-          <td>{{ book.quantity }}</td>
-          <td>{{ book.category }}</td>
-          <td>
-            <img [src]="book.imageUrl" alt="{{ book.name }}" class="book-image" />
-          </td>
-          <td>{{ book.description }}</td>
-          <td>
-            <button (click)="editBook(book)">Sửa</button>
-            <button (click)="deleteBook(book.id)">Xóa</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <!-- Phân trang -->
-    <div class="pagination">
-      <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Trước</button>
-      <button *ngFor="let page of pagesToShow" 
-              [disabled]="page === currentPage" 
-              (click)="page !== -1 && goToPage(page)">
-        {{ page === -1 ? '...' : page }}
-      </button>
-      <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Tiếp</button>
-    </div>
+  <div class="add-book-button">
+    <button (click)="addNewBook()">Thêm mới sách</button>
   </div>
+
+  <table class="book-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tên sách</th>
+        <th>Tác giả</th>
+        <th>Giá</th>
+        <th>Số lượng</th>
+        <th>Thể loại</th>
+        <th>Hình ảnh</th>
+        <th>Mô tả</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let book of paginatedBooks; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ book.name }}</td>
+        <td>{{ book.author }}</td>
+        <td>{{ book.price | currency:'VND' }}</td>
+        <td>{{ book.quantity }}</td>
+        <td>{{ book.category }}</td>
+        <td>
+          <img [src]="book.imageUrl" alt="{{ book.name }}" class="book-image" />
+        </td>
+        <td>{{ book.description }}</td>
+        <td>
+          <button (click)="editBook(book)">Sửa</button>
+          <button (click)="deleteBook(book.id)">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Phân trang -->
+  <div class="pagination">
+    <button (click)="goToPage(currentPage - 1)" [disabled]="currentPage === 1">Trước</button>
+    <button *ngFor="let page of pagesToShow" [disabled]="page === currentPage" (click)="page !== -1 && goToPage(page)">
+      {{ page === -1 ? '...' : page }}
+    </button>
+    <button (click)="goToPage(currentPage + 1)" [disabled]="currentPage === totalPages">Tiếp</button>
+  </div>
+</div>

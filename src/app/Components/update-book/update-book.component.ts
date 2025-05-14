@@ -15,7 +15,7 @@ export interface Category {
 @Component({
   selector: 'app-update-book',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule,MatDialogModule, CommonModule],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule],
   templateUrl: './update-book.component.html',
   styleUrl: './update-book.component.scss'
 })
@@ -36,8 +36,8 @@ export class UpdateBookComponent {
     private router: Router) {
     this.book = dataUpdate.book;
   }
-  
-  ngOnInit(){
+
+  ngOnInit() {
     this.getListCategory();
   }
 
@@ -51,8 +51,8 @@ export class UpdateBookComponent {
       this.idToken = '';
     }
 
-    const dataSubmit ={
-      id : this.book?.id,
+    const dataSubmit = {
+      id: this.book?.id,
       name: this.book?.name,
       price: this.book?.price,
       quantity: this.book?.quantity,
@@ -67,9 +67,9 @@ export class UpdateBookComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-      
-    this.http.put(this.apiUrl, dataSubmit, {headers}).subscribe(
-            (response: any) => {
+
+    this.http.put(this.apiUrl, dataSubmit, { headers }).subscribe(
+      (response: any) => {
         this.message = response.message;
         this.code = response.code;
         this.data = response.object;
@@ -133,7 +133,7 @@ export class UpdateBookComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-    
+
     this.http.get(this.apiUrl, { headers }).subscribe(
       (response: any) => {
         this.message = response.message;

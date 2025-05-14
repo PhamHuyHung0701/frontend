@@ -91,7 +91,7 @@ export class CreateBookComponent {
         }
         else {
           this.message = response.message;
-          alert(this.message)  
+          alert(this.message)
         }
       },
       error => {
@@ -142,7 +142,7 @@ export class CreateBookComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
-    
+
     this.http.get(this.apiUrl, { headers }).subscribe(
       (response: any) => {
         this.message = response.message;

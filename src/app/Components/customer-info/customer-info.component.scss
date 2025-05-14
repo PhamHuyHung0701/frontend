@@ -1,100 +1,102 @@
 .customer-info-container {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
-  .customer-details {
-    .form-group {
-      margin-bottom: 15px;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
 
-      label {
-        display: block;
-        font-weight: bold;
-        margin-bottom: 5px;
-        color: #555;
-      }
+.customer-details {
+  .form-group {
+    margin-bottom: 15px;
 
-      input {
-        width: 100%;
-        padding: 10px;
-        font-size: 14px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        box-sizing: border-box;
+    label {
+      display: block;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #555;
+    }
 
-        &:focus {
-          border-color: #007bff;
-          outline: none;
-          box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-        }
+    input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+
+      &:focus {
+        border-color: #007bff;
+        outline: none;
+        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
       }
     }
   }
+}
 
-  .readonly-input {
-    width: 100%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-    background-color: #e9ecef; 
-    color: #000000; 
-    cursor: not-allowed; 
-    border: 1px solid #ced4da; 
-  }
-  
-  .customer-details h2 {
-    margin-bottom: 15px;
-  }
-  
-  .bills-table {
-    padding: 15px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-  }
-  
-  .bills-table h2 {
-    margin-bottom: 15px;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  table th, table td {
-    border: 1px solid #ddd;
-    padding: 10px;
-    text-align: left;
-  }
-  
-  table th {
-    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
-    color: white;
-  }
-  
-  table tr:nth-child(even) {
-    background-color: #f2f2f2;
-  }
-  
-  table tr:hover {
-    background-color: #ddd;
-  }
+.readonly-input {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  background-color: #e9ecef;
+  color: #000000;
+  cursor: not-allowed;
+  border: 1px solid #ced4da;
+}
 
-  .edit-button {
-    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
-    color: white; /* Màu chữ trắng */
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin-top: 10px;
-    margin-right: 10px;
-    margin-bottom: 10px;
+.customer-details h2 {
+  margin-bottom: 15px;
+}
+
+.bills-table {
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+.bills-table h2 {
+  margin-bottom: 15px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th,
+table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+table th {
+  background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+  color: white;
+}
+
+table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table tr:hover {
+  background-color: #ddd;
+}
+
+.edit-button {
+  background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+  color: white;
+  /* Màu chữ trắng */
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
 }
 
 .edit-button:hover {
@@ -102,17 +104,18 @@
 }
 
 .change-password-button {
-    background: linear-gradient(135deg, #ff9ff3, #00d2d3);
-    color: white; /* Màu chữ trắng */
-    border: none;
-    padding: 10px 20px;
-    font-size: 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    margin: 10px;
+  background: linear-gradient(135deg, #ff9ff3, #00d2d3);
+  color: white;
+  /* Màu chữ trắng */
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 10px;
 }
 
 .change-password-button:hover {
-     background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+  background: linear-gradient(135deg, #00d2d3, #ff9ff3);
 }

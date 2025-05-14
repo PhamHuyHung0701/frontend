@@ -15,60 +15,60 @@ import { MatDialogRef } from '@angular/material/dialog';
   styleUrl: './change-password.component.scss'
 })
 export class ChangePasswordComponent {
-      @Input() oldPassword: string = '';
-      @Input() newPassword: string = '';
-      @Input() confirmPassword: string = '';
+  @Input() oldPassword: string = '';
+  @Input() newPassword: string = '';
+  @Input() confirmPassword: string = '';
 
-      code: number = 0;
-      message: string = '';
-      data: string = '';
-      idToken: string = '';
-      apiUrl: string = '';
+  code: number = 0;
+  message: string = '';
+  data: string = '';
+  idToken: string = '';
+  apiUrl: string = '';
 
-      constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>,
-        private http: HttpClient,
-        private router: Router) { }
-      
-      changePassword(){
-        this.apiUrl = API_URL + 'user/change-password';
-        const tokenData = localStorage.getItem('idToken')?.trim();
-        if (tokenData) {
-          this.idToken = JSON.parse(tokenData);
+  constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>,
+    private http: HttpClient,
+    private router: Router) { }
+
+  changePassword() {
+    this.apiUrl = API_URL + 'user/change-password';
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    }
+    else {
+      this.idToken = '';
+    }
+    const changePasswordData = {
+      oldPassword: this.oldPassword,
+      newPassword: this.newPassword,
+      confirmPassword: this.confirmPassword
+    };
+
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
+
+    this.http.put(this.apiUrl, changePasswordData, { headers }).subscribe(
+      (response: any) => {
+        this.message = response.message;
+        this.code = response.code;
+        if (this.code === 1) {
+          alert(this.message);
+          this.dialogRef.close();
         }
         else {
-          this.idToken = '';
+          alert(this.message);
         }
-        const changePasswordData = {
-              oldPassword : this.oldPassword,
-              newPassword : this.newPassword,
-              confirmPassword : this.confirmPassword
-        };
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    )
+  }
 
-        const language = navigator.language;
-        const headers = new HttpHeaders()
-        .set('Authorization', `Bearer ${this.idToken}`)
-        .set('Accept-Language', language)
-        .set('ngrok-skip-browser-warning', 'true');
-        
-        this.http.put(this.apiUrl, changePasswordData, { headers }).subscribe(
-            (response: any) => {
-              this.message = response.message;
-              this.code = response.code;
-              if (this.code === 1) {
-                 alert(this.message);
-                 this.dialogRef.close();
-              }
-              else {
-                alert(this.message);
-              }
-            },
-            error => {
-              console.log("Error: " + error.message);
-            } 
-        )
-      }
-      
-      closeWindow() {
-        this.dialogRef.close();
-      }
+  closeWindow() {
+    this.dialogRef.close();
+  }
 }

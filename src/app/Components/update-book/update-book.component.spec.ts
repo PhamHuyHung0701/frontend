@@ -10,8 +10,8 @@ describe('UpdateBookComponent', () => {
     await TestBed.configureTestingModule({
       imports: [UpdateBookComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(UpdateBookComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

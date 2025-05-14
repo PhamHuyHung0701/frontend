@@ -19,11 +19,7 @@
       <tbody>
         <tr *ngFor="let book of data">
           <td>
-            <input
-              type="checkbox"
-              [(ngModel)]="book.selected"
-              (change)="updateSelectedBooks()"
-            />
+            <input type="checkbox" [(ngModel)]="book.selected" (change)="updateSelectedBooks()" />
           </td>
           <td><img [src]="book.imageUrl" [alt]="book.name" class="book-image" /></td>
           <td>{{ book.name }}</td>

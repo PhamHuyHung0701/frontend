@@ -28,7 +28,7 @@ export class BookManageComponent {
 
   deleteMessage: string = '';
 
-  currentPage = 1; 
+  currentPage = 1;
   itemsPerPage = 10;
   paginatedBooks: Book[] = [];
 

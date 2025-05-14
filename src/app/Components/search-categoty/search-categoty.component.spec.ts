@@ -10,8 +10,8 @@ describe('SearchCategotyComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SearchCategotyComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SearchCategotyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

@@ -1,48 +1,45 @@
 <app-menu></app-menu>
 
 <div class="account-manage-container">
-    <h2>Quản lý tài khoản</h2>
-  
-    <!-- Bảng danh sách người dùng -->
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Tên</th>
-          <th>Email</th>
-          <th>Vai trò</th>
-          <th>Hành động</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let user of listUser | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
-          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
-          <td>{{ user.name }}</td>
-          <td>{{ user.email }}</td>
-          <td>{{ user.role }}</td>
-          <td>
-            <button (click)="resetPassword(user)">Đặt lại mật khẩu</button>
-            <button 
-            *ngIf="user.role === 'ADMIN'" 
-            (click)="revokeAdmin(user)">
+  <h2>Quản lý tài khoản</h2>
+
+  <!-- Bảng danh sách người dùng -->
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Tên</th>
+        <th>Email</th>
+        <th>Vai trò</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr
+        *ngFor="let user of listUser | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+        <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="resetPassword(user)">Đặt lại mật khẩu</button>
+          <button *ngIf="user.role === 'ADMIN'" (click)="revokeAdmin(user)">
             Thu quyền quản trị viên
           </button>
 
-          <button 
-            *ngIf="user.role === 'USER'" 
-            (click)="grantAdmin(user)">
+          <button *ngIf="user.role === 'USER'" (click)="grantAdmin(user)">
             Cấp quyền quản trị viên
           </button>
 
           <button (click)="deleteAccount(user)">Xoá</button>
-          </td>
-        </tr>
-        <tr *ngIf="listUser.length === 0">
-          <td colspan="5" class="text-center">Không có dữ liệu</td>
-        </tr>
-      </tbody>
-    </table>
-  
-    <!-- Phân trang -->
-    <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
-  </div>
+        </td>
+      </tr>
+      <tr *ngIf="listUser.length === 0">
+        <td colspan="5" class="text-center">Không có dữ liệu</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- Phân trang -->
+  <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+</div>

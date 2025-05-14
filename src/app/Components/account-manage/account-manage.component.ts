@@ -66,7 +66,7 @@ export class AccountManageComponent {
       }
     );
   }
-  
+
   resetPassword(user: User) {
     this.apiUrl = API_URL + `admin/user/reset-password/${user.id}`
 

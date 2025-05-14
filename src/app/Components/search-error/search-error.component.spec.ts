@@ -10,8 +10,8 @@ describe('SearchErrorComponent', () => {
     await TestBed.configureTestingModule({
       imports: [SearchErrorComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(SearchErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

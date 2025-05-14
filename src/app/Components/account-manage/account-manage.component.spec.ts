@@ -10,8 +10,8 @@ describe('AccountManageComponent', () => {
     await TestBed.configureTestingModule({
       imports: [AccountManageComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(AccountManageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

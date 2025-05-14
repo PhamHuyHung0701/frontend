@@ -31,7 +31,7 @@ export class CustomerInfoComponent {
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) { }
 
   ngOnInit() {
-     this.getCustomerInfo();
+    this.getCustomerInfo();
   }
 
   getCustomerInfo() {
@@ -55,8 +55,8 @@ export class CustomerInfoComponent {
         this.message = response.message;
         this.code = response.code;
         if (this.code === 1) {
-            this.user = response.object.user;
-            this.bills = response.object.bills;
+          this.user = response.object.user;
+          this.bills = response.object.bills;
         }
         else {
           alert(response.message);
@@ -83,16 +83,16 @@ export class CustomerInfoComponent {
       address: this.user?.address,
     }
     const headers = new HttpHeaders()
-    .set('Authorization', `Bearer ${this.idToken}`)
-    .set('Accept-Language', language)
-    .set('ngrok-skip-browser-warning', 'true');
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
 
     this.http.put(this.apiUrl, changeUserData, { headers }).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
         if (this.code === 1) {
-           alert(this.message);
+          alert(this.message);
         }
         else {
           alert(this.message);
@@ -100,9 +100,9 @@ export class CustomerInfoComponent {
       },
       error => {
         console.log("Error: " + error.message);
-      } 
-  )
-}
+      }
+    )
+  }
 
   changePassword() {
     const dialogRef = this.dialog.open(ChangePasswordComponent, {

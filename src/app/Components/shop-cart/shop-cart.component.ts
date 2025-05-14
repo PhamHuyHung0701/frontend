@@ -109,7 +109,7 @@ export class ShopCartComponent {
       0
     );
   }
-  
+
   checkout() {
     localStorage.setItem('selectedBooks', JSON.stringify(this.selectedBooks));
     localStorage.setItem('totalPrice', JSON.stringify(this.calculateSelectedTotal()));

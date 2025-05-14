@@ -10,8 +10,8 @@ describe('ShopCartComponent', () => {
     await TestBed.configureTestingModule({
       imports: [ShopCartComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(ShopCartComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

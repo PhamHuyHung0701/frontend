@@ -10,8 +10,8 @@ describe('PaymentComponent', () => {
     await TestBed.configureTestingModule({
       imports: [PaymentComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(PaymentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
