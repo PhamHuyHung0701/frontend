@@ -57,7 +57,6 @@ export class AccountManageComponent {
         this.data = response.object;
         if (this.code === 1) {
           this.listUser = response.object;
-          this.updatePaginatedUsers();
         } else {
           console.log(response.message);
         }
@@ -67,60 +66,130 @@ export class AccountManageComponent {
       }
     );
   }
+  
+  resetPassword(user: User) {
+    this.apiUrl = API_URL + `admin/user/reset-password/${user.id}`
 
-  updatePaginatedUsers() {
-    const startIndex = (this.currentPage - 1) * this.itemsPerPage;
-    const endIndex = startIndex + this.itemsPerPage;
-    this.paginatedUsers = this.listUser.slice(startIndex, endIndex);
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    }
+    else {
+      this.idToken = '';
+    }
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
+
+    this.http.put(this.apiUrl, { headers }).subscribe(
+      (response: any) => {
+        this.code = response.code;
+        if (this.code === 1) {
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    );
   }
 
-  goToPage(page: number) {
-    this.currentPage = page;
-    this.updatePaginatedUsers();
+  revokeAdmin(user: User) {
+    this.apiUrl = API_URL + `admin/user/remove-role-admin/${user.id}`
+
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    }
+    else {
+      this.idToken = '';
+    }
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
+
+    this.http.put(this.apiUrl, { headers }).subscribe(
+      (response: any) => {
+        this.code = response.code;
+        if (this.code === 1) {
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    );
   }
 
-  get totalPages(): number {
-    return Math.ceil(this.listUser.length / this.itemsPerPage);
+  grantAdmin(user: User) {
+    this.apiUrl = API_URL + `admin/user/add-role-admin/${user.id}`
+
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    }
+    else {
+      this.idToken = '';
+    }
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
+
+    this.http.put(this.apiUrl, { headers }).subscribe(
+      (response: any) => {
+        this.code = response.code;
+        if (this.code === 1) {
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    );
   }
 
-  get pagesToShow(): number[] {
-    const totalPages = this.totalPages;
-    const pages: number[] = [];
 
-    // Luôn hiển thị trang đầu tiên
-    if (this.currentPage > 2) {
-      pages.push(1);
+  deleteAccount(user: User) {
+    this.apiUrl = API_URL + `admin/user/reset-password/${user.id}`
+
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
     }
-
-    // Hiển thị dấu "..." nếu cần
-    if (this.currentPage > 3) {
-      pages.push(-1); // -1 đại diện cho "..."
+    else {
+      this.idToken = '';
     }
+    const language = navigator.language;
+    const headers = new HttpHeaders()
+      .set('Accept-Language', language)
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('ngrok-skip-browser-warning', 'true');
 
-    // Hiển thị trang liền trước
-    if (this.currentPage > 1) {
-      pages.push(this.currentPage - 1);
-    }
-
-    // Hiển thị trang hiện tại
-    pages.push(this.currentPage);
-
-    // Hiển thị trang liền sau
-    if (this.currentPage < totalPages) {
-      pages.push(this.currentPage + 1);
-    }
-
-    // Hiển thị dấu "..." nếu cần
-    if (this.currentPage < totalPages - 2) {
-      pages.push(-1); // -1 đại diện cho "..."
-    }
-
-    // Luôn hiển thị trang cuối cùng
-    if (this.currentPage < totalPages - 1) {
-      pages.push(totalPages);
-    }
-
-    return pages;
+    this.http.delete(this.apiUrl, { headers }).subscribe(
+      (response: any) => {
+        this.code = response.code;
+        if (this.code === 1) {
+          alert(response.message);
+        } else {
+          alert(response.message);
+        }
+      },
+      error => {
+        console.log("Error: " + error.message);
+      }
+    );
   }
 
 }

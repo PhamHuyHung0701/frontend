@@ -21,8 +21,20 @@
           <td>{{ user.email }}</td>
           <td>{{ user.role }}</td>
           <td>
-            <!-- <button class="btn btn-primary btn-sm" (click)="">Sửa</button>
-            <button class="btn btn-danger btn-sm" (click)="">Xóa</button> -->
+            <button (click)="resetPassword(user)">Đặt lại mật khẩu</button>
+            <button 
+            *ngIf="user.role === 'ADMIN'" 
+            (click)="revokeAdmin(user)">
+            Thu quyền quản trị viên
+          </button>
+
+          <button 
+            *ngIf="user.role === 'USER'" 
+            (click)="grantAdmin(user)">
+            Cấp quyền quản trị viên
+          </button>
+
+          <button (click)="deleteAccount(user)">Xoá</button>
           </td>
         </tr>
         <tr *ngIf="listUser.length === 0">

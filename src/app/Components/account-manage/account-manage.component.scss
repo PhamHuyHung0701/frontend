@@ -41,6 +41,7 @@
       }
   
       button {
+        background-color: #f4f4f4;
         padding: 5px 10px;
         border: none;
         border-radius: 3px;
@@ -53,23 +54,6 @@
         opacity: 0.9;
       }
   
-      button:first-child {
-        background-color: #4CAF50; /* Màu xanh cho nút Sửa */
-        color: white;
-      }
-  
-      button:first-child:hover {
-        background-color: #45a049;
-      }
-  
-      button:last-child {
-        background-color: #f44336; /* Màu đỏ cho nút Xóa */
-        color: white;
-      }
-  
-      button:last-child:hover {
-        background-color: #d32f2f;
-      }
     }
   
     .pagination-controls {
