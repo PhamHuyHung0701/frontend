@@ -82,11 +82,12 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, {headers}).subscribe(
+    this.http.put(this.apiUrl,null, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
           alert(response.message);
+          window.location.reload();
         } else {
           alert(response.message);
         }
@@ -112,11 +113,12 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, {headers}).subscribe(
+    this.http.put(this.apiUrl,null, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
           alert(response.message);
+          window.location.reload();
         } else {
           alert(response.message);
         }
@@ -142,11 +144,12 @@ export class AccountManageComponent {
       .set('Authorization', `Bearer ${this.idToken}`)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, {headers}).subscribe(
+    this.http.put(this.apiUrl,null, {headers}).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
           alert(response.message);
+          window.location.reload();
         } else {
           alert(response.message);
         }
