@@ -6,11 +6,12 @@ import {MenuComponent} from '../menu/menu.component';
 import {Router} from '@angular/router';
 import {API_URL} from '../../app.config';
 import {Book} from '../../Models/book';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.scss'
 })

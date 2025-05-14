@@ -6,11 +6,12 @@ import {MenuComponent} from "../menu/menu.component";
 import {API_URL} from '../../app.config';
 import {Router} from '@angular/router';
 import {Book} from '../../Models/book';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })

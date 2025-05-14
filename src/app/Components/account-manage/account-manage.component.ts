@@ -8,11 +8,12 @@ import {User} from '../../Models/user';
 import {Router} from '@angular/router';
 import {API_URL} from '../../app.config';
 import {NgxPaginationModule} from 'ngx-pagination';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-account-manage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule, MenuComponent, NgxPaginationModule],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule, MenuComponent, NgxPaginationModule, EndPageComponent],
   templateUrl: './account-manage.component.html',
   styleUrl: './account-manage.component.scss'
 })
@@ -181,6 +182,7 @@ export class AccountManageComponent {
         this.code = response.code;
         if (this.code === 1) {
           alert(response.message);
+          window.location.reload();
         } else {
           alert(response.message);
         }

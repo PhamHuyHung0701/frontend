@@ -1,0 +1,26 @@
+.footer {
+    background-color: #f8f9fa; 
+    color: #333; 
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #ddd; 
+  
+    .footer-content {
+      max-width: 800px;
+      margin: 0 auto;
+  
+      p {
+        margin: 5px 0;
+        font-size: 14px;
+      }
+  
+      a {
+        color: #007bff; /* Màu xanh cho link */
+        text-decoration: none;
+  
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }

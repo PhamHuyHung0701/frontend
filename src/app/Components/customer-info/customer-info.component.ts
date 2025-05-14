@@ -10,11 +10,12 @@ import {Bill} from '../../Models/bill';
 import {MatDialog} from '@angular/material/dialog';
 import {CreateBookComponent} from '../create-book/create-book.component';
 import {ChangePasswordComponent} from '../change-password/change-password.component';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-customer-info',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
   templateUrl: './customer-info.component.html',
   styleUrl: './customer-info.component.scss'
 })

@@ -9,11 +9,12 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {UpdateBookComponent} from '../update-book/update-book.component';
 import {CreateBookComponent} from '../create-book/create-book.component';
 import {Book} from '../../Models/book';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-book-manage',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule, MenuComponent, EndPageComponent],
   templateUrl: './book-manage.component.html',
   styleUrl: './book-manage.component.scss'
 })

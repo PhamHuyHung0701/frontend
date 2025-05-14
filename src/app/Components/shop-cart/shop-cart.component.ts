@@ -6,11 +6,12 @@ import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MenuComponent} from '../menu/menu.component';
 import {Book} from '../../Models/book';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-shop-cart',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
   templateUrl: './shop-cart.component.html',
   styleUrl: './shop-cart.component.scss'
 })

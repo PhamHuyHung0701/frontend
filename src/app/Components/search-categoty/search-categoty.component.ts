@@ -6,11 +6,12 @@ import {MenuComponent} from "../menu/menu.component";
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {Book} from '../../Models/book';
+import { EndPageComponent } from "../end-page/end-page.component";
 
 @Component({
   selector: 'app-search-categoty',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
   templateUrl: './search-categoty.component.html',
   styleUrl: './search-categoty.component.scss'
 })
