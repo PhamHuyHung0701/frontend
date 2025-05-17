@@ -40,16 +40,28 @@ export class UpdateBookComponent {
     category: '',
     selected: false
   };
+  upbook: Book = {
+    id: 1, // ID mặc định hoặc giá trị từ nguồn khác
+    name: '',
+    price: 0,
+    quantity: 0,
+    author: '',
+    imageUrl: '',
+    description: '',
+    category: '',
+    selected: false
+  };
   tokenService: TokenService = new TokenService();
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
               public dialogRef: MatDialogRef<UpdateBookComponent>,
               private http: HttpClient,
               private router: Router) {
-    this.book = dataUpdate.book;
+    this.upbook = dataUpdate.book;
   }
 
   ngOnInit() {
+    this.book = this.upbook;
     this.getListCategory();
   }
 
