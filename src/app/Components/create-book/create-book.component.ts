@@ -55,6 +55,10 @@ export class CreateBookComponent {
   }
 
   onSubmit() {
+    if(this.book.quantity > 10000){
+      alert("Số lượng không được lớn hơn 10000");
+      return
+    }
     this.apiUrl = API_URL + 'admin/product';
     this.idToken = this.tokenService.getToken();
     const dataSubmit = {

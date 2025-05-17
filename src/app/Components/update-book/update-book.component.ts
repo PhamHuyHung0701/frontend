@@ -29,7 +29,17 @@ export class UpdateBookComponent {
   idToken: string = '';
   api_url: string = '';
   listCategory: Category[] = [];
-  book: Book | null = null;
+  book: Book = {
+    id: 1, // ID mặc định hoặc giá trị từ nguồn khác
+    name: '',
+    price: 0,
+    quantity: 0,
+    author: '',
+    imageUrl: '',
+    description: '',
+    category: '',
+    selected: false
+  };
   tokenService: TokenService = new TokenService();
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
@@ -44,6 +54,10 @@ export class UpdateBookComponent {
   }
 
   onSubmit() {
+    if(this.book.quantity > 10000){
+      alert("Số lượng không được lớn hơn 10000");
+      return
+    }
     this.apiUrl = API_URL + 'admin/product';
     this.idToken = this.tokenService.getToken();
 
