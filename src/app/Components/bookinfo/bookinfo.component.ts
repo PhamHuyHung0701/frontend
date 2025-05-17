@@ -7,6 +7,7 @@ import {Router} from '@angular/router';
 import {API_URL} from '../../app.config';
 import {Book} from '../../Models/book';
 import { EndPageComponent } from "../end-page/end-page.component";
+import { TokenService } from '../../Services/tokenService';
 
 @Component({
   selector: 'app-bookinfo',
@@ -22,7 +23,7 @@ export class BookinfoComponent {
   data: string = '';
 
   apiUrl: string = '';
-
+  tokenService: TokenService = new TokenService();
   idToken: string = '';
 
   constructor(private http: HttpClient, private router: Router) {
@@ -39,13 +40,7 @@ export class BookinfoComponent {
 
   onAddShoppingCart() {
     this.apiUrl = API_URL + 'shopcart';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
-
+    this.idToken = this.tokenService.getToken();
     const loginData = {
       productId: this.book?.id,
     };

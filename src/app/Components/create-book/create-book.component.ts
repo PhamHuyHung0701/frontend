@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
 import {API_URL} from '../../app.config';
 import {Book} from '../../Models/book';
+import { TokenService } from '../../Services/tokenService';
 
 export interface Category {
   id: number;
@@ -29,6 +30,7 @@ export class CreateBookComponent {
 
   idToken: string = '';
   listCategory: Category[] = [];
+  tokenService: TokenService = new TokenService();
 
   book: Book = {
     id: 1, // ID mặc định hoặc giá trị từ nguồn khác
@@ -54,13 +56,7 @@ export class CreateBookComponent {
 
   onSubmit() {
     this.apiUrl = API_URL + 'admin/product';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
-
+    this.idToken = this.tokenService.getToken();
     const dataSubmit = {
       id: this.book?.id,
       name: this.book?.name,

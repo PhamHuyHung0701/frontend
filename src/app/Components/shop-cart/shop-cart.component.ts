@@ -7,6 +7,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MenuComponent} from '../menu/menu.component';
 import {Book} from '../../Models/book';
 import { EndPageComponent } from "../end-page/end-page.component";
+import { TokenService } from '../../Services/tokenService';
 
 @Component({
   selector: 'app-shop-cart',
@@ -22,17 +23,13 @@ export class ShopCartComponent {
   data: Book[] = [];
   apiUrl: string = '';
   selectedBooks: Book[] = [];
+  tokenService: TokenService = new TokenService();
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.idToken = this.tokenService.getToken();
     const language = navigator.language;
     this.apiUrl = API_URL + 'shopcart';
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.idToken}`).set('Accept-Language', language);

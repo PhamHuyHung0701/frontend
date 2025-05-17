@@ -6,6 +6,7 @@ import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/
 import {Router} from '@angular/router';
 import {API_URL} from '../../app.config';
 import {Book} from '../../Models/book';
+import { TokenService } from '../../Services/tokenService';
 
 export interface Category {
   id: number;
@@ -29,6 +30,7 @@ export class UpdateBookComponent {
   api_url: string = '';
   listCategory: Category[] = [];
   book: Book | null = null;
+  tokenService: TokenService = new TokenService();
 
   constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
               public dialogRef: MatDialogRef<UpdateBookComponent>,
@@ -43,12 +45,7 @@ export class UpdateBookComponent {
 
   onSubmit() {
     this.apiUrl = API_URL + 'admin/product';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.idToken = this.tokenService.getToken();
 
     const dataSubmit = {
       id: this.book?.id,
@@ -118,12 +115,7 @@ export class UpdateBookComponent {
 
   getListCategory() {
     this.apiUrl = API_URL + 'category';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.idToken = this.tokenService.getToken();
 
     const language = navigator.language;
     const headers = new HttpHeaders()

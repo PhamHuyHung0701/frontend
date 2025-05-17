@@ -11,6 +11,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {CreateBookComponent} from '../create-book/create-book.component';
 import {ChangePasswordComponent} from '../change-password/change-password.component';
 import { EndPageComponent } from "../end-page/end-page.component";
+import { TokenService } from '../../Services/tokenService';
 
 @Component({
   selector: 'app-customer-info',
@@ -28,6 +29,7 @@ export class CustomerInfoComponent {
   idToken: string = '';
   user: User | null = null;
   bills: Bill[] = [];
+  tokenService: TokenService = new TokenService();
 
   constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
   }
@@ -38,13 +40,7 @@ export class CustomerInfoComponent {
 
   getCustomerInfo() {
     this.apiUrl = API_URL + 'user/info';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
-
+    this.idToken = this.tokenService.getToken();
     const language = navigator.language;
     const headers = new HttpHeaders()
       .set('Authorization', `Bearer ${this.idToken}`)

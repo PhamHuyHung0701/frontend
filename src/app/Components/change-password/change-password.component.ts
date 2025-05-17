@@ -6,6 +6,7 @@ import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {API_URL} from '../../app.config';
 import {Router} from '@angular/router';
 import {MatDialogRef} from '@angular/material/dialog';
+import { TokenService } from '../../Services/tokenService';
 
 @Component({
   selector: 'app-change-password',
@@ -24,6 +25,7 @@ export class ChangePasswordComponent {
   data: string = '';
   idToken: string = '';
   apiUrl: string = '';
+  tokenService: TokenService = new TokenService();
 
   constructor(public dialogRef: MatDialogRef<ChangePasswordComponent>,
               private http: HttpClient,
@@ -32,12 +34,7 @@ export class ChangePasswordComponent {
 
   changePassword() {
     this.apiUrl = API_URL + 'user/change-password';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.idToken = this.tokenService.getToken();
     const changePasswordData = {
       oldPassword: this.oldPassword,
       newPassword: this.newPassword,

@@ -4,6 +4,7 @@ import {Component, Input} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 import {API_URL} from '../../app.config';
+import { TokenService } from '../../Services/tokenService';
 
 export interface Menu {
   id: number;
@@ -31,17 +32,13 @@ export class MenuComponent {
   message: string = '';
   idToken: string = '';
   data: Data[] = [];
+  tokenService:TokenService = new TokenService();
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
   ngOnInit() {
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.idToken = this.tokenService.getToken();
     const language = navigator.language;
     this.apiUrl = API_URL + 'menu/homepage';
     // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.idToken}`).set('Accept-Language', language);

@@ -10,6 +10,7 @@ import {UpdateBookComponent} from '../update-book/update-book.component';
 import {CreateBookComponent} from '../create-book/create-book.component';
 import {Book} from '../../Models/book';
 import { EndPageComponent } from "../end-page/end-page.component";
+import { TokenService } from '../../Services/tokenService';
 
 @Component({
   selector: 'app-book-manage',
@@ -28,7 +29,7 @@ export class BookManageComponent {
   shoppingCard: Book[] = [];
 
   deleteMessage: string = '';
-
+  tokenService: TokenService = new TokenService();
   currentPage = 1;
   itemsPerPage = 10;
   paginatedBooks: Book[] = [];
@@ -45,13 +46,7 @@ export class BookManageComponent {
   idToken: string = '';
 
   getBooks() {
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
-
+    this.idToken = this.tokenService.getToken();
     this.apiUrl = API_URL + 'product/home';
     const language = navigator.language;
     const headers = new HttpHeaders()
@@ -137,12 +132,6 @@ export class BookManageComponent {
 
     this.apiUrl = API_URL + `admin/product/${bookId}`;
 
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
     const language = navigator.language;
     const headers = new HttpHeaders()
       .set('Accept-Language', language)
