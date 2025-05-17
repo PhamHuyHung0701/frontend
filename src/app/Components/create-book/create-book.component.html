@@ -11,7 +11,7 @@
   </div>
   <div>
     <label for="quantity">Số lượng còn lại:</label>
-    <input id="quantity" pattern="[0-9]" type="number" [(ngModel)]="book.quantity" name="quantity" required min="0"/>
+    <input id="quantity" (keydown)="blockInvalidInput($event)" type="number" [(ngModel)]="book.quantity" name="quantity" required min="0"/>
   </div>
   <div>
     <label for="author">Tác giả:</label>

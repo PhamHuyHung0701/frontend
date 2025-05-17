@@ -155,4 +155,13 @@ export class CreateBookComponent {
       }
     )
   }
+
+  blockInvalidInput(event: KeyboardEvent): void {
+    const key = event.key;
+  
+    // Chỉ cho phép các phím số từ 0 đến 9 và các phím điều hướng
+    if (!/^[0-9]$/.test(key) && key !== 'Backspace' && key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'Delete') {
+      event.preventDefault(); // Ngăn không cho nhập ký tự không hợp lệ
+    }
+  }
 }
