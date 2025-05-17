@@ -143,14 +143,8 @@ export class AccountManageComponent {
 
 
   deleteAccount(user: User) {
-    this.apiUrl = API_URL + `admin/user/reset-password/${user.id}`
-
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.apiUrl = API_URL + `admin/user/${user.id}`
+    this.idToken = this.tokenService.getToken();
     const language = navigator.language;
     const headers = new HttpHeaders()
       .set('Accept-Language', language)
