@@ -196,7 +196,9 @@ export class BookManageComponent {
           this.books = response.object;
           this.updatePaginatedBooks();
         } else {
-          this.router.navigate(['/searcherror']);
+          // this.router.navigate(['/searcherror']);
+          this.books = [];
+          this.updatePaginatedBooks();
         }
       },
       error => {

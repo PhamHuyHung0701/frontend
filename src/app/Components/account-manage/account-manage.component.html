@@ -3,6 +3,12 @@
 <div class="account-manage-container">
   <h2>Quản lý tài khoản</h2>
 
+  <form class="search-form" (ngSubmit)="searchAccount()" #loginForm="ngForm">
+    <input type="text" id="searchText" [(ngModel)]="searchText" name="searchText" placeholder="Nhập từ khóa tìm kiếm"
+           required/>
+    <button type="submit">Tìm kiếm</button>
+  </form>
+
   <!-- Bảng danh sách người dùng -->
   <table class="table table-bordered">
     <thead>

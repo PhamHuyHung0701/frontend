@@ -29,6 +29,7 @@ export class AccountManageComponent {
   itemsPerPage = 10;
   paginatedUsers: User[] = [];
   tokenService: TokenService = new TokenService();
+  searchText: string = '';
 
   constructor(private http: HttpClient,
               private router: Router,
@@ -165,6 +166,32 @@ export class AccountManageComponent {
         console.log("Error: " + error.message);
       }
     );
+  }
+  searchAccount() {
+    if (this.searchText === '') {
+      this.getAllUser();
+    } else {
+      this.apiUrl = API_URL + `admin/user/${this.searchText}`;
+      this.idToken = this.tokenService.getToken();
+      const language = navigator.language;
+      const headers = new HttpHeaders()
+        .set('Accept-Language', language)
+        .set('Authorization', `Bearer ${this.idToken}`)
+        .set('ngrok-skip-browser-warning', 'true');
+      this.http.get(this.apiUrl, {headers}).subscribe(
+        (response: any) => {
+          this.code = response.code;
+          if (this.code === 1) {
+            this.listUser = response.object;
+          } else {
+            alert(response.message);
+          }
+        },
+        error => {
+          console.log("Error: " + error.message);
+        }
+      );
+    }
   }
 
 }
