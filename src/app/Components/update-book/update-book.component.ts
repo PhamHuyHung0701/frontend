@@ -155,6 +155,7 @@ export class UpdateBookComponent {
         this.code = response.code;
         if (this.code === 1) {
           this.listCategory = response.object;
+          this.book.category = this.listCategory[0].name;
         } else {
           console.log(response.message);
         }

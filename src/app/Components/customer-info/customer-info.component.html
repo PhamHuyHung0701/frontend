@@ -44,7 +44,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let bill of bills; let i = index">
+      <tr *ngFor="let bill of bills | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
         <td>{{ i + 1 }}</td>
         <td>{{ bill.date }}</td>
         <td>{{ bill.totalPrice | currency:'VND' }}</td>
@@ -59,4 +59,5 @@
     </table>
   </div>
 </div>
+<pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
 <app-end-page></app-end-page>

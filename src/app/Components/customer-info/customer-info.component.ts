@@ -12,11 +12,12 @@ import {CreateBookComponent} from '../create-book/create-book.component';
 import {ChangePasswordComponent} from '../change-password/change-password.component';
 import { EndPageComponent } from "../end-page/end-page.component";
 import { TokenService } from '../../Services/tokenService';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({
   selector: 'app-customer-info',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, NgxPaginationModule, MenuComponent, EndPageComponent],
   templateUrl: './customer-info.component.html',
   styleUrl: './customer-info.component.scss'
 })
@@ -26,6 +27,8 @@ export class CustomerInfoComponent {
   message: string = '';
   data: string = '';
   apiUrl: string = '';
+  currentPage = 1;
+  itemsPerPage = 10;
   idToken: string = '';
   user: User | null = null;
   bills: Bill[] = [];
