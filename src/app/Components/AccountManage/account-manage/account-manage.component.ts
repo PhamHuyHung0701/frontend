@@ -1,15 +1,17 @@
-import {Component} from '@angular/core';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {User} from '../../../Models/user';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
-import {NgxPaginationModule} from 'ngx-pagination';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { API_URL } from '../../../app.config';
+import { User } from '../../../Models/user';
 import { TokenService } from '../../../Services/tokenService';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { UserService } from '../../../Services/userServcice';
+
 
 @Component({
   selector: 'app-account-manage',
@@ -32,24 +34,16 @@ export class AccountManageComponent {
   searchText: string = '';
 
   constructor(private http: HttpClient,
-              private router: Router,
-              private dialog: MatDialog) {
+    private router: Router,
+    private dialog: MatDialog) {
   }
-
+  userService: UserService = new UserService(this.http);
   ngOnInit() {
     this.getAllUser();
   }
 
   getAllUser() {
-    this.idToken = this.tokenService.getToken();
-
-    this.apiUrl = API_URL + 'admin/user';
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, {headers}).subscribe(
+    this.userService.getAllUser().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -61,22 +55,14 @@ export class AccountManageComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     );
   }
 
   resetPassword(user: User) {
-    this.apiUrl = API_URL + `admin/user/reset-password/${user.id}`
-
-    this.idToken = this.tokenService.getToken();
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.put(this.apiUrl,null, {headers}).subscribe(
+    this.userService.resetPassword(user).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -87,21 +73,14 @@ export class AccountManageComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     );
   }
 
   revokeAdmin(user: User) {
-    this.apiUrl = API_URL + `admin/user/remove-role-admin/${user.id}`
-    this.idToken = this.tokenService.getToken();
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.put(this.apiUrl,null, {headers}).subscribe(
+    this.userService.revokeAdmin(user).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -118,15 +97,7 @@ export class AccountManageComponent {
   }
 
   grantAdmin(user: User) {
-    this.apiUrl = API_URL + `admin/user/add-role-admin/${user.id}`
-    this.idToken = this.tokenService.getToken();
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.put(this.apiUrl,null, {headers}).subscribe(
+    this.userService.grantAdmin(user).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -137,22 +108,14 @@ export class AccountManageComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     );
   }
-
 
   deleteAccount(user: User) {
-    this.apiUrl = API_URL + `admin/user/${user.id}`
-    this.idToken = this.tokenService.getToken();
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.delete(this.apiUrl, {headers}).subscribe(
+    this.userService.deleteAccount(user).subscribe(
       (response: any) => {
         this.code = response.code;
         if (this.code === 1) {
@@ -167,18 +130,12 @@ export class AccountManageComponent {
       }
     );
   }
+
   searchAccount() {
     if (this.searchText === '') {
       this.getAllUser();
     } else {
-      this.apiUrl = API_URL + `admin/user/${this.searchText}`;
-      this.idToken = this.tokenService.getToken();
-      const language = navigator.language;
-      const headers = new HttpHeaders()
-        .set('Accept-Language', language)
-        .set('Authorization', `Bearer ${this.idToken}`)
-        .set('ngrok-skip-browser-warning', 'true');
-      this.http.get(this.apiUrl, {headers}).subscribe(
+      this.userService.searchAccountByEmail(this.searchText).subscribe(
         (response: any) => {
           this.code = response.code;
           if (this.code === 1) {
@@ -188,10 +145,10 @@ export class AccountManageComponent {
           }
         },
         error => {
+          alert("Lỗi hệ thống");
           console.log("Error: " + error.message);
         }
       );
     }
   }
-
 }

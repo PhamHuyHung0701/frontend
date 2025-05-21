@@ -1,12 +1,14 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from "../../Share/menu/menu.component";
-import {API_URL} from '../../../app.config';
-import {Router} from '@angular/router';
-import {Book} from '../../../Models/book';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { BookService } from '../../../Services/bookService';
+
 
 @Component({
   selector: 'app-home',
@@ -45,16 +47,14 @@ export class HomeComponent {
   currentPage = 1; // Trang hiện tại
   itemsPerPage = 12; // Số sách trên mỗi trang
   paginatedBooks: Book[] = [];
+  bookService: BookService = new BookService(this.http);
 
   ngOnInit() {
     this.getBooks();
   }
 
   getBooks() {
-    this.apiUrl = API_URL + 'product/home';
-    const language = navigator.language;
-    const headers = new HttpHeaders().set('Accept-Language', language).set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, {headers}).subscribe(
+    this.bookService.getBooks().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -67,6 +67,7 @@ export class HomeComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     );

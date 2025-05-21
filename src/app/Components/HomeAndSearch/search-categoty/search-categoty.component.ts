@@ -1,12 +1,14 @@
+import { CommonModule } from '@angular/common';
 import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
-import {MenuComponent} from "../../Share/menu/menu.component";
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {Book} from '../../../Models/book';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { BookService } from '../../../Services/bookService';
+
 
 @Component({
   selector: 'app-search-categoty',
@@ -29,20 +31,10 @@ export class SearchCategotyComponent {
 
   constructor(private http: HttpClient, private router: Router) {
   }
-
+  
+  bookService: BookService = new BookService(this.http);
   ngOnInit() {
-    this.apiUrl = API_URL + 'product/category';
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-    const searchData = localStorage.getItem('searchCategory')?.trim();
-    if (searchData) {
-      this.searchText = JSON.parse(searchData);
-    }
-    const params = new HttpParams().set('categoryName', this.searchText);
-
-    this.http.get(this.apiUrl, {headers, params}).subscribe(
+    this.bookService.getBookByCategory().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -55,6 +47,7 @@ export class SearchCategotyComponent {
         }
       },
       error => {
+        alert('Lỗi hệ thống');
         console.log('Error: ' + error.message);
       }
     );

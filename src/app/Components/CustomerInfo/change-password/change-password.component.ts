@@ -1,12 +1,13 @@
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Component, Input} from '@angular/core';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {API_URL} from '../../../app.config';
-import {Router} from '@angular/router';
-import {MatDialogRef} from '@angular/material/dialog';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
 import { TokenService } from '../../../Services/tokenService';
+import { UserService } from '../../../Services/userServcice';
+
 
 @Component({
   selector: 'app-change-password',
@@ -31,23 +32,10 @@ export class ChangePasswordComponent {
               private http: HttpClient,
               private router: Router) {
   }
-
+  userService: UserService = new UserService(this.http); 
+  
   changePassword() {
-    this.apiUrl = API_URL + 'user/change-password';
-    this.idToken = this.tokenService.getToken();
-    const changePasswordData = {
-      oldPassword: this.oldPassword,
-      newPassword: this.newPassword,
-      confirmPassword: this.confirmPassword
-    };
-
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.put(this.apiUrl, changePasswordData, {headers}).subscribe(
+    this.userService.changePassword(this.oldPassword,this.newPassword,this.confirmPassword).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

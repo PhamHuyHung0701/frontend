@@ -1,16 +1,18 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {API_URL} from '../../../app.config';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {Router} from '@angular/router';
-import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {UpdateBookComponent} from '../update-book/update-book.component';
-import {CreateBookComponent} from '../create-book/create-book.component';
-import {Book} from '../../../Models/book';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { HttpClientModule, HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogModule, MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
 import { TokenService } from '../../../Services/tokenService';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { CreateBookComponent } from '../create-book/create-book.component';
+import { UpdateBookComponent } from '../update-book/update-book.component';
+import { BookService } from '../../../Services/bookService';
+
 
 @Component({
   selector: 'app-book-manage',
@@ -44,16 +46,10 @@ export class BookManageComponent {
   }
 
   idToken: string = '';
+  bookService: BookService = new BookService(this.http);
 
   getBooks() {
-    this.idToken = this.tokenService.getToken();
-    this.apiUrl = API_URL + 'product/home';
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, {headers}).subscribe(
+    this.bookService.getBooks().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -129,16 +125,7 @@ export class BookManageComponent {
 
 
   deleteBook(bookId: number) {
-
-    this.apiUrl = API_URL + `admin/product/${bookId}`;
-
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.delete(this.apiUrl, {headers}).subscribe(
+    this.bookService.deleteBook(bookId).subscribe(
       (response: any) => {
         this.deleteMessage = response.message;
         this.code = response.code;
@@ -180,14 +167,7 @@ export class BookManageComponent {
   searchText: string = '';
 
   searchBook() {
-    this.apiUrl = API_URL + 'product';
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-    const params = new HttpParams().set('name', this.searchText);
-
-    this.http.get(this.apiUrl, {headers, params}).subscribe(
+    this.bookService.searchBook().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

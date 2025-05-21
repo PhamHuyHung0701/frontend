@@ -1,9 +1,10 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component, Input} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {API_URL} from '../../app.config';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+
 
 @Component({
   selector: 'app-register',

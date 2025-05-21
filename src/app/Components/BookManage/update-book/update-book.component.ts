@@ -1,12 +1,14 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component, Inject} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
-import {Book} from '../../../Models/book';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, Inject } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogModule, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
 import { TokenService } from '../../../Services/tokenService';
+import { BookService } from '../../../Services/bookService';
+
 
 export interface Category {
   id: number;
@@ -60,37 +62,17 @@ export class UpdateBookComponent {
     this.upbook = dataUpdate.book;
   }
 
+  bookService: BookService = new BookService(this.http);
   ngOnInit() {
     this.book = JSON.parse(JSON.stringify(this.upbook));
     this.getListCategory();
   }
-
   onSubmit() {
     if(this.book.quantity > 10000){
       alert("Số lượng không được lớn hơn 10000");
       return
     }
-    this.apiUrl = API_URL + 'admin/product';
-    this.idToken = this.tokenService.getToken();
-
-    const dataSubmit = {
-      id: this.book?.id,
-      name: this.book?.name,
-      price: this.book?.price,
-      quantity: this.book?.quantity,
-      description: this.book?.description,
-      category: this.book?.category,
-      imageUrl: this.book?.imageUrl,
-      author: this.book?.author,
-    }
-
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.put(this.apiUrl, dataSubmit, {headers}).subscribe(
+    this.bookService.updateBook(this.book).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -106,6 +88,7 @@ export class UpdateBookComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     )
@@ -126,7 +109,6 @@ export class UpdateBookComponent {
             .map(byte => String.fromCharCode(byte))
             .join('');
           const base64String = btoa(binaryString);
-
           this.book.imageUrl = base64String;
         }
       };
@@ -140,16 +122,7 @@ export class UpdateBookComponent {
 
 
   getListCategory() {
-    this.apiUrl = API_URL + 'category';
-    this.idToken = this.tokenService.getToken();
-
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.get(this.apiUrl, {headers}).subscribe(
+    this.bookService.getListCategory().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -161,6 +134,7 @@ export class UpdateBookComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     )
@@ -168,10 +142,8 @@ export class UpdateBookComponent {
 
   blockInvalidInput(event: KeyboardEvent): void {
     const key = event.key;
-  
-    // Chỉ cho phép các phím số từ 0 đến 9 và các phím điều hướng
     if (!/^[0-9]$/.test(key) && key !== 'Backspace' && key !== 'ArrowLeft' && key !== 'ArrowRight' && key !== 'Delete') {
-      event.preventDefault(); // Ngăn không cho nhập ký tự không hợp lệ
+      event.preventDefault();
     }
   }
 }

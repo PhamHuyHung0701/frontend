@@ -1,13 +1,16 @@
-import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
+
+import { CommonModule } from '@angular/common';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import {Component} from '@angular/core';
-import {API_URL} from '../../../app.config';
-import {Router} from '@angular/router';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {Book} from '../../../Models/book';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
 import { TokenService } from '../../../Services/tokenService';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { BookService } from '../../../Services/bookService';
+
 
 @Component({
   selector: 'app-shop-cart',
@@ -27,17 +30,9 @@ export class ShopCartComponent {
 
   constructor(private http: HttpClient, private router: Router) {
   }
-
+  bookService: BookService = new BookService(this.http);
   ngOnInit() {
-    this.idToken = this.tokenService.getToken();
-    const language = navigator.language;
-    this.apiUrl = API_URL + 'shopcart';
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.idToken}`).set('Accept-Language', language);
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, {headers}).subscribe(
+    this.bookService.getBookInShopCart().subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -48,6 +43,7 @@ export class ShopCartComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     )
@@ -64,21 +60,7 @@ export class ShopCartComponent {
   }
 
   removeFromCart(book: Book) {
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
-    const language = navigator.language;
-    this.apiUrl = API_URL + `shopcart/${book.id}`;
-    // const params = new HttpParams().set('productId', book.id);
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.idToken}`).set('Accept-Language', language);
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-    this.http.delete(this.apiUrl, {headers}).subscribe(
+    this.bookService.removeFromCart(book).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -89,6 +71,7 @@ export class ShopCartComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     )

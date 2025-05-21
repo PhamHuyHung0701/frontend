@@ -1,18 +1,18 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
-import {User} from '../../../Models/user';
-import {Bill} from '../../../Models/bill';
-import {MatDialog} from '@angular/material/dialog';
-import {CreateBookComponent} from '../../BookManage/create-book/create-book.component';
-import {ChangePasswordComponent} from '../change-password/change-password.component';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { Bill } from '../../../Models/bill';
+import { User } from '../../../Models/user';
 import { TokenService } from '../../../Services/tokenService';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { UserService } from '../../../Services/userServcice';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { ChangePasswordComponent } from '../change-password/change-password.component';
+
 
 @Component({
   selector: 'app-customer-info',
@@ -23,6 +23,8 @@ import {NgxPaginationModule} from 'ngx-pagination';
 })
 export class CustomerInfoComponent {
 
+  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
+  }
   code: number = 0;
   message: string = '';
   data: string = '';
@@ -33,59 +35,34 @@ export class CustomerInfoComponent {
   user: User | null = null;
   bills: Bill[] = [];
   tokenService: TokenService = new TokenService();
-
-  constructor(private http: HttpClient, private router: Router, private dialog: MatDialog) {
-  }
-
+  userService: UserService = new UserService(this.http); 
+  response: any = {};
   ngOnInit() {
     this.getCustomerInfo();
   }
 
   getCustomerInfo() {
-    this.apiUrl = API_URL + 'user/info';
-    this.idToken = this.tokenService.getToken();
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.get(this.apiUrl, {headers}).subscribe(
-      (response: any) => {
+    this.userService.getCustomerInfo().subscribe(
+      response => {
         this.message = response.message;
         this.code = response.code;
-        if (this.code === 1) {
+        if(this.code === 1) {
           this.user = response.object.user;
           this.bills = response.object.bills;
-        } else {
-          alert(response.message);
+        }
+        else{
+          alert(this.message);
         }
       },
       error => {
-        console.log("Error: " + error.message);
+        alert("Lỗi hệ thống");
+        console.error(error);
       }
-    )
+    );
   }
 
   editUser() {
-    this.apiUrl = API_URL + 'user';
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
-    const language = navigator.language;
-    const changeUserData = {
-      name: this.user?.name,
-      address: this.user?.address,
-    }
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-
-    this.http.put(this.apiUrl, changeUserData, {headers}).subscribe(
+    this.userService.editUser(this.user?.name || '', this.user?.address || '').subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -96,6 +73,7 @@ export class CustomerInfoComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     )

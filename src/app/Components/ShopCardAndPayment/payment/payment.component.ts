@@ -1,13 +1,15 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component, Input} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
-import {Book} from '../../../Models/book';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
 import { TokenService } from '../../../Services/tokenService';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { PayService } from '../../../Services/payService';
+
 
 @Component({
   selector: 'app-payment',
@@ -29,6 +31,7 @@ export class PaymentComponent {
   idToken: string = '';
   notificationMessage: string = '';
   tokenService: TokenService = new TokenService();
+  payService: PayService = new PayService(this.http);
 
   constructor(private http: HttpClient, private router: Router) {
   }
@@ -43,25 +46,9 @@ export class PaymentComponent {
       this.totalPrice = JSON.parse(totalPrice);
     }
   }
-
+  
   submitPayment() {
-
-    this.idToken = this.tokenService.getToken();
-
-    this.apiUrl = API_URL + 'bill'
-    const data = {
-      products: this.selectedBooks,
-      totalPrice: this.totalPrice,
-      address: this.address,
-      phoneNumber: this.phone
-    };
-
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Accept-Language', language)
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, data, {headers}).subscribe(
+    this.payService.submitPayment(this.selectedBooks, this.totalPrice, this.address, this.phone).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -74,6 +61,7 @@ export class PaymentComponent {
         }
       },
       error => {
+        alert("Lỗi hệ thống");
         console.log("Error: " + error.message);
       }
     )

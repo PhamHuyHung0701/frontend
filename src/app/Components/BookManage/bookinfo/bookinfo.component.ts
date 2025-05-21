@@ -1,13 +1,15 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from '../../Share/menu/menu.component';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
-import {Book} from '../../../Models/book';
-import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
+import { Book } from '../../../Models/book';
 import { TokenService } from '../../../Services/tokenService';
+import { EndPageComponent } from '../../Share/end-page/end-page.component';
+import { MenuComponent } from '../../Share/menu/menu.component';
+import { BookService } from '../../../Services/bookService';
+
 
 @Component({
   selector: 'app-bookinfo',
@@ -28,7 +30,7 @@ export class BookinfoComponent {
 
   constructor(private http: HttpClient, private router: Router) {
   }
-
+  bookService: BookService = new BookService(this.http);
   book: Book | null = null;
 
   ngOnInit() {
@@ -39,17 +41,7 @@ export class BookinfoComponent {
   }
 
   onAddShoppingCart() {
-    this.apiUrl = API_URL + 'shopcart';
-    this.idToken = this.tokenService.getToken();
-    const loginData = {
-      productId: this.book?.id,
-    };
-    const language = navigator.language;
-    const headers = new HttpHeaders()
-      .set('Authorization', `Bearer ${this.idToken}`)
-      .set('Accept-Language', language)
-      .set('ngrok-skip-browser-warning', 'true');
-    this.http.post(this.apiUrl, loginData, {headers}).subscribe(
+    this.bookService.onAddShoppingCart(this.book?.id ?? 0).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;

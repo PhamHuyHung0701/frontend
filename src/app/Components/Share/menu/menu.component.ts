@@ -1,10 +1,11 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {Component, Input} from '@angular/core';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {Router} from '@angular/router';
-import {API_URL} from '../../../app.config';
+import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, Input } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { API_URL } from '../../../app.config';
 import { TokenService } from '../../../Services/tokenService';
+
 
 export interface Menu {
   id: number;
@@ -41,7 +42,6 @@ export class MenuComponent {
     this.idToken = this.tokenService.getToken();
     const language = navigator.language;
     this.apiUrl = API_URL + 'menu/homepage';
-    // const headers = new HttpHeaders().set('Authorization', `Bearer ${this.idToken}`).set('Accept-Language', language);
     const headers = new HttpHeaders().set('Authorization', `Bearer ${this.idToken}`).set('Accept-Language', language).set('ngrok-skip-browser-warning', 'true');
     this.http.get(this.apiUrl, {headers}).subscribe(
       (response: any) => {
