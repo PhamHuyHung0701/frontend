@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { HttpClientModule, HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
@@ -8,6 +8,7 @@ import { Book } from '../../../Models/book';
 import { EndPageComponent } from '../../Share/end-page/end-page.component';
 import { MenuComponent } from '../../Share/menu/menu.component';
 import { BookService } from '../../../Services/bookService';
+import { BookRank } from '../../../Models/bookRank';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class HomeComponent {
   apiUrl: string = '';
   books: Book[] = [];
   shoppingCard: Book[] = [];
+  listBookRank: BookRank[] = [];
 
   currentImageIndex = 0; // Chỉ số ảnh hiện tại
   images = [
@@ -51,6 +53,7 @@ export class HomeComponent {
 
   ngOnInit() {
     this.getBooks();
+    this.getRanking();
   }
 
   getBooks() {
@@ -131,5 +134,23 @@ export class HomeComponent {
   bookClick(book: Book) {
     localStorage.setItem('book', JSON.stringify(book));
     this.router.navigate(['/bookdetail']);
+  }
+
+  getRanking() {
+    this.bookService.getRanking().subscribe(
+      (response: any) => {
+        this.message = response.message;
+        this.code = response.code;
+        if (this.code === 1) {
+          this.listBookRank = response.object;
+        } else {
+          console.log(response.message);
+        }
+      },
+      error => {
+        alert("Lỗi hệ thống");
+        console.log("Error: " + error.message);
+      }
+    );
   }
 }

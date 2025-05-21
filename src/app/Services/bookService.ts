@@ -148,12 +148,7 @@ export class BookService {
   }
 
   removeFromCart(book: Book): Observable<ResponseBackend> {
-    const tokenData = localStorage.getItem('idToken')?.trim();
-    if (tokenData) {
-      this.idToken = JSON.parse(tokenData);
-    } else {
-      this.idToken = '';
-    }
+    this.idToken = this.tokenService.getToken();
     const language = navigator.language;
     this.apiUrl = API_URL + `shopcart/${book.id}`;
     const headers = new HttpHeaders()
@@ -161,5 +156,16 @@ export class BookService {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
     return this.http.delete<ResponseBackend>(this.apiUrl, {headers})
+  }
+
+  getRanking(): Observable<ResponseBackend> {
+    this.idToken = this.tokenService.getToken();
+    const language = navigator.language;
+    this.apiUrl = API_URL + `product/ranking`;
+    const headers = new HttpHeaders()
+      .set('Authorization', `Bearer ${this.idToken}`)
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
+    return this.http.get<ResponseBackend>(this.apiUrl, {headers});
   }
 }

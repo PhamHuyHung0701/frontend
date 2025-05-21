@@ -6,6 +6,35 @@
   <button class="next-button" (click)="nextImage()">&#10095;</button>
 </div>
 
+<div class="ranking-podium">
+  <h2>Top 3 Sách Bán Chạy Nhất</h2>
+  <br>
+  <br>
+  <div class="podium">
+    <div class="podium-item second" (click)="bookClick(listBookRank[1].product)">
+      <img [src]="listBookRank[1].product.imageUrl" alt="Sách hạng 2" />
+      <div class="rank">2</div>
+      <div class="book-title">{{ listBookRank[1].product.name }}</div>
+      <div class="book-author">{{ listBookRank[1].product.author }}</div>
+      <div class="book-sold">Đã bán: {{ listBookRank[1].sellingQuantity }}</div>
+    </div>
+    <div class="podium-item first" (click)="bookClick(listBookRank[0].product)">
+      <img [src]="listBookRank[0].product.imageUrl" alt="Sách hạng 1" />
+      <div class="rank">1</div>
+      <div class="book-title">{{ listBookRank[0].product.name }}</div>
+      <div class="book-author">{{ listBookRank[0].product.author }}</div>
+      <div class="book-sold">Đã bán: {{ listBookRank[0].sellingQuantity }}</div>
+    </div>
+    <div class="podium-item third" (click)="bookClick(listBookRank[2].product)">
+      <img [src]="listBookRank[2].product.imageUrl" alt="Sách hạng 3" />
+      <div class="rank">3</div>
+      <div class="book-title">{{ listBookRank[2].product.name }}</div>
+      <div class="book-author">{{ listBookRank[2].product.author }}</div>
+      <div class="book-sold">Đã bán: {{ listBookRank[2].sellingQuantity }}</div>
+    </div>
+  </div>
+</div>
+
 <form>
   <div class="book-list">
     <div *ngFor="let book of paginatedBooks" class="book-card" (click)="bookClick(book)">
