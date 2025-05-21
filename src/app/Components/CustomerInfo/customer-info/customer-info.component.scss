@@ -68,7 +68,7 @@ table th,
 table td {
   border: 1px solid #ddd;
   padding: 10px;
-  text-align: left;
+  text-align: center;
 }
 
 table th {
@@ -118,4 +118,28 @@ table tr:hover {
 
 .change-password-button:hover {
   background: linear-gradient(135deg, #00d2d3, #ff9ff3);
+}
+
+.view-button {
+  background: linear-gradient(90deg, #6dd5ed, #2193b0);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(33,147,176,0.08);
+
+  &:hover {
+    background: linear-gradient(90deg, #2193b0, #6dd5ed);
+    box-shadow: 0 4px 16px rgba(33,147,176,0.16);
+    transform: translateY(-2px) scale(1.04);
+  }
+
+  &:active {
+    background: #2193b0;
+    transform: scale(0.98);
+  }
 }

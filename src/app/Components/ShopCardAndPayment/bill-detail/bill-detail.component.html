@@ -1,0 +1,32 @@
+<app-menu></app-menu>
+<div class="bill-detail-card">
+    <h2>Chi tiết hóa đơn</h2>
+    <div class="bill-info">
+      <div><strong>Mã hóa đơn:</strong> {{ bill.id }}</div>
+      <div><strong>Ngày:</strong> {{ bill.date }}</div>
+      <div><strong>Tổng tiền:</strong> {{ bill.totalPrice | number }} đ</div>
+      <div><strong>Địa chỉ:</strong> {{ bill.address }}</div>
+      <div><strong>Mô tả:</strong> {{ bill.description }}</div>
+      <div><strong>Số điện thoại:</strong> {{ bill.phoneNumber }}</div>
+    </div>
+    <h3>Sản phẩm</h3>
+    <table class="product-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Tên sách</th>
+          <th>Tác giả</th>
+          <th>Giá</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of bill.products; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ book.name }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.price | number }} đ</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <app-end-page></app-end-page>

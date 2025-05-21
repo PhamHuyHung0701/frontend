@@ -11,6 +11,7 @@ import { SearchErrorComponent } from './Components/HomeAndSearch/search-error/se
 import { SearchpageComponent } from './Components/HomeAndSearch/searchpage/searchpage.component';
 import { PaymentComponent } from './Components/ShopCardAndPayment/payment/payment.component';
 import { ShopCartComponent } from './Components/ShopCardAndPayment/shop-cart/shop-cart.component';
+import { BillDetailComponent } from './Components/ShopCardAndPayment/bill-detail/bill-detail.component';
 
 
 export const routes: Routes = [
@@ -26,5 +27,6 @@ export const routes: Routes = [
   { path: 'bookmanage', component: BookManageComponent },
   { path: 'customerinfo', component: CustomerInfoComponent },
   { path: 'accountmanage', component: AccountManageComponent },
+  { path: 'billdetail', component: BillDetailComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

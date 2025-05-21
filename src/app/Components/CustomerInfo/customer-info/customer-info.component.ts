@@ -85,4 +85,9 @@ export class CustomerInfoComponent {
       height: '70%'
     });
   }
+
+  viewBill(bill: Bill) {
+    localStorage.setItem('bill', JSON.stringify(bill.id));
+    this.router.navigate(['/billdetail']);
+  }
 }

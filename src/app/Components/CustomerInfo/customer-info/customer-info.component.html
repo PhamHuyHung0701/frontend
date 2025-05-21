@@ -41,6 +41,7 @@
         <th>Địa chỉ</th>
         <th>Mô tả</th>
         <th>Số điện thoại</th>
+        <th>Hành động</th>
       </tr>
       </thead>
       <tbody>
@@ -51,7 +52,12 @@
         <td>{{ bill.address }}</td>
         <td>{{ bill.description }}</td>
         <td>{{ bill.phoneNumber }}</td>
-      </tr>
+          <td>
+            <div style="text-align: center;">
+              <button class="view-button" (click)="viewBill(bill)">Xem chi tiết</button>
+            </div>
+          </td>
+         </tr>
       <tr *ngIf="bills.length === 0">
         <td colspan="6">Không có hóa đơn nào.</td>
       </tr>

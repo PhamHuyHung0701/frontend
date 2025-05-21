@@ -1,3 +1,5 @@
+import { Book } from "./book";
+
 export interface Bill {
   id: number;
   date: string;
@@ -5,4 +7,5 @@ export interface Bill {
   address: string;
   description: string;
   phoneNumber: string;
+  products: Book[];
 }

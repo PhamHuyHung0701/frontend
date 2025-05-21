@@ -1,0 +1,56 @@
+.bill-detail-card {
+    max-width: 800px;
+    margin: 40px auto;
+    background: linear-gradient(135deg, #f5b0ec, #b4fcfc);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px #e0e0e0;
+    padding: 32px 24px;
+  
+    h2 {
+      text-align: center;
+      color: #2193b0;
+      margin-bottom: 24px;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+  
+    .bill-info {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px 24px;
+      margin-bottom: 24px;
+      font-size: 1.05rem;
+  
+      div {
+        background: #f9f9f9;
+        border-radius: 6px;
+        padding: 8px 12px;
+      }
+    }
+  
+    h3 {
+      margin-top: 24px;
+      color: #2193b0;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  
+    .product-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+  
+      th, td {
+        border: 1px solid #e0e0e0;
+        padding: 8px 12px;
+        text-align: left;
+      }
+  
+      th {
+        background: #2193b0;
+        color: #fff;
+        font-weight: 600;
+      }
+  
+    }
+  }

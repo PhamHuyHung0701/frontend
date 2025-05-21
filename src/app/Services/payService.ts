@@ -27,4 +27,15 @@ export class PayService{
           .set('ngrok-skip-browser-warning', 'true');
         return this.http.post<ResponseBackend>(this.apiUrl, data, {headers});
       }
+
+      getBillDetail(billId: number): Observable<ResponseBackend> {
+        this.idToken = this.tokenService.getToken();
+        this.apiUrl = API_URL + `bill/detail/${billId}`;
+        const language = navigator.language;
+        const headers = new HttpHeaders()
+          .set('Accept-Language', language)
+          .set('Authorization', `Bearer ${this.idToken}`)
+          .set('ngrok-skip-browser-warning', 'true');
+        return this.http.get<ResponseBackend>(this.apiUrl, {headers});
+      }
 }
