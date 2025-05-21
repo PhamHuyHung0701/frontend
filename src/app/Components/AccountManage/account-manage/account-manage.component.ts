@@ -1,15 +1,15 @@
 import {Component} from '@angular/core';
-import {MenuComponent} from '../menu/menu.component';
+import {MenuComponent} from '../../Share/menu/menu.component';
 import {CommonModule} from '@angular/common';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
-import {User} from '../../Models/user';
+import {User} from '../../../Models/user';
 import {Router} from '@angular/router';
-import {API_URL} from '../../app.config';
+import {API_URL} from '../../../app.config';
 import {NgxPaginationModule} from 'ngx-pagination';
-import { EndPageComponent } from "../end-page/end-page.component";
-import { TokenService } from '../../Services/tokenService';
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { TokenService } from '../../../Services/tokenService';
 
 @Component({
   selector: 'app-account-manage',

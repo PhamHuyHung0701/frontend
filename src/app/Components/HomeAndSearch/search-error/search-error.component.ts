@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {MenuComponent} from "../menu/menu.component";
+import {MenuComponent} from "../../Share/menu/menu.component";
 import {CommonModule} from '@angular/common';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import { EndPageComponent } from "../end-page/end-page.component";
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
 
 @Component({
   selector: 'app-search-error',

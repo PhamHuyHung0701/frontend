@@ -2,16 +2,16 @@ import {CommonModule} from '@angular/common';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from '../menu/menu.component';
+import {MenuComponent} from '../../Share/menu/menu.component';
 import {Router} from '@angular/router';
-import {API_URL} from '../../app.config';
-import {User} from '../../Models/user';
-import {Bill} from '../../Models/bill';
+import {API_URL} from '../../../app.config';
+import {User} from '../../../Models/user';
+import {Bill} from '../../../Models/bill';
 import {MatDialog} from '@angular/material/dialog';
-import {CreateBookComponent} from '../create-book/create-book.component';
+import {CreateBookComponent} from '../../BookManage/create-book/create-book.component';
 import {ChangePasswordComponent} from '../change-password/change-password.component';
-import { EndPageComponent } from "../end-page/end-page.component";
-import { TokenService } from '../../Services/tokenService';
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { TokenService } from '../../../Services/tokenService';
 import {NgxPaginationModule} from 'ngx-pagination';
 
 @Component({

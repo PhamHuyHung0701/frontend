@@ -1,13 +1,13 @@
 import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Component} from '@angular/core';
-import {API_URL} from '../../app.config';
+import {API_URL} from '../../../app.config';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from '../menu/menu.component';
-import {Book} from '../../Models/book';
-import { EndPageComponent } from "../end-page/end-page.component";
-import { TokenService } from '../../Services/tokenService';
+import {MenuComponent} from '../../Share/menu/menu.component';
+import {Book} from '../../../Models/book';
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { TokenService } from '../../../Services/tokenService';
 
 @Component({
   selector: 'app-shop-cart',

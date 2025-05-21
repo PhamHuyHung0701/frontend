@@ -1,60 +1,48 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MenuComponent} from "../menu/menu.component";
-import {API_URL} from '../../app.config';
+import {MenuComponent} from '../../Share/menu/menu.component';
+import {API_URL} from '../../../app.config';
 import {Router} from '@angular/router';
-import {Book} from '../../Models/book';
-import { EndPageComponent } from "../end-page/end-page.component";
+import {Book} from '../../../Models/book';
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
 
 @Component({
-  selector: 'app-home',
+  selector: 'app-searchpage',
   standalone: true,
   imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule, MenuComponent, EndPageComponent],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  templateUrl: './searchpage.component.html',
+  styleUrl: './searchpage.component.scss'
 })
-export class HomeComponent {
+export class SearchpageComponent {
   code: number = 0;
   message: string = '';
   data: Book[] = [];
   apiUrl: string = '';
   books: Book[] = [];
-  shoppingCard: Book[] = [];
+  searchText: string = '';
 
-  currentImageIndex = 0; // Chỉ số ảnh hiện tại
-  images = [
-    'assets/banner1.jpg',
-    'assets/banner2.jpg',
-    'assets/banner3.jpg'
-  ];
+  currentPage = 1; // Trang hiện tại
+  itemsPerPage = 8; // Số sách trên mỗi trang
+  paginatedBooks: Book[] = []; // Danh sách sách hiển thị trên trang hiện tại
 
   constructor(private http: HttpClient, private router: Router) {
   }
 
-  nextImage() {
-    this.currentImageIndex = (this.currentImageIndex + 1) % this.images.length;
-  }
-
-  prevImage() {
-    this.currentImageIndex =
-      (this.currentImageIndex - 1 + this.images.length) % this.images.length;
-  }
-
-  currentPage = 1; // Trang hiện tại
-  itemsPerPage = 12; // Số sách trên mỗi trang
-  paginatedBooks: Book[] = [];
-
   ngOnInit() {
-    this.getBooks();
-  }
-
-  getBooks() {
-    this.apiUrl = API_URL + 'product/home';
+    this.apiUrl = API_URL + 'product';
     const language = navigator.language;
-    const headers = new HttpHeaders().set('Accept-Language', language).set('ngrok-skip-browser-warning', 'true');
-    this.http.get(this.apiUrl, {headers}).subscribe(
+    const headers = new HttpHeaders()
+      .set('Accept-Language', language)
+      .set('ngrok-skip-browser-warning', 'true');
+    const searchData = localStorage.getItem('searchText')?.trim();
+    if (searchData) {
+      this.searchText = JSON.parse(searchData);
+    }
+    const params = new HttpParams().set('name', this.searchText);
+
+    this.http.get(this.apiUrl, {headers, params}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
@@ -63,30 +51,34 @@ export class HomeComponent {
           this.books = response.object;
           this.updatePaginatedBooks();
         } else {
-          console.log(response.message);
+          this.router.navigate(['/searcherror']);
         }
       },
       error => {
-        console.log("Error: " + error.message);
+        console.log('Error: ' + error.message);
       }
     );
   }
 
+  // Cập nhật danh sách sách hiển thị trên trang hiện tại
   updatePaginatedBooks() {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage;
     const endIndex = startIndex + this.itemsPerPage;
     this.paginatedBooks = this.books.slice(startIndex, endIndex);
   }
 
+  // Chuyển đến trang cụ thể
   goToPage(page: number) {
     this.currentPage = page;
     this.updatePaginatedBooks();
   }
 
+  // Tính tổng số trang
   get totalPages(): number {
     return Math.ceil(this.books.length / this.itemsPerPage);
   }
 
+  // Tạo danh sách các trang cần hiển thị
   get pagesToShow(): number[] {
     const totalPages = this.totalPages;
     const pages: number[] = [];

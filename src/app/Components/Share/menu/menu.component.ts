@@ -3,8 +3,8 @@ import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {Component, Input} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
-import {API_URL} from '../../app.config';
-import { TokenService } from '../../Services/tokenService';
+import {API_URL} from '../../../app.config';
+import { TokenService } from '../../../Services/tokenService';
 
 export interface Menu {
   id: number;

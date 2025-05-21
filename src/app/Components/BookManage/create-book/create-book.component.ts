@@ -1,12 +1,12 @@
 import {CommonModule} from '@angular/common';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
+import {HttpClientModule, HttpClient, HttpHeaders} from '@angular/common/http';
 import {Component, Inject} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {API_URL} from '../../app.config';
-import {Book} from '../../Models/book';
-import { TokenService } from '../../Services/tokenService';
+import {API_URL} from '../../../app.config';
+import {Book} from '../../../Models/book';
+import { TokenService } from '../../../Services/tokenService';
 
 export interface Category {
   id: number;
@@ -14,21 +14,24 @@ export interface Category {
 }
 
 @Component({
-  selector: 'app-update-book',
+  selector: 'app-create-book',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, MatDialogModule, CommonModule],
-  templateUrl: './update-book.component.html',
-  styleUrl: './update-book.component.scss'
+  imports: [ReactiveFormsModule, FormsModule, HttpClientModule, CommonModule],
+  templateUrl: './create-book.component.html',
+  styleUrl: './create-book.component.scss'
 })
-export class UpdateBookComponent {
+export class CreateBookComponent {
 
   code: number = 0;
   message: string = '';
   data: string = '';
+
   apiUrl: string = '';
+
   idToken: string = '';
-  api_url: string = '';
   listCategory: Category[] = [];
+  tokenService: TokenService = new TokenService();
+
   book: Book = {
     id: 1, // ID mặc định hoặc giá trị từ nguồn khác
     name: '',
@@ -40,28 +43,14 @@ export class UpdateBookComponent {
     category: '',
     selected: false
   };
-  upbook: Book = {
-    id: 1, // ID mặc định hoặc giá trị từ nguồn khác
-    name: '',
-    price: 0,
-    quantity: 0,
-    author: '',
-    imageUrl: '',
-    description: '',
-    category: '',
-    selected: false
-  };
-  tokenService: TokenService = new TokenService();
 
-  constructor(@Inject(MAT_DIALOG_DATA) public dataUpdate: { book: Book },
-              public dialogRef: MatDialogRef<UpdateBookComponent>,
-              private http: HttpClient,
-              private router: Router) {
-    this.upbook = dataUpdate.book;
+  constructor(
+    public dialogRef: MatDialogRef<CreateBookComponent>,
+    private http: HttpClient,
+    private router: Router) {
   }
 
   ngOnInit() {
-    this.book = JSON.parse(JSON.stringify(this.upbook));
     this.getListCategory();
   }
 
@@ -72,7 +61,6 @@ export class UpdateBookComponent {
     }
     this.apiUrl = API_URL + 'admin/product';
     this.idToken = this.tokenService.getToken();
-
     const dataSubmit = {
       id: this.book?.id,
       name: this.book?.name,
@@ -90,19 +78,18 @@ export class UpdateBookComponent {
       .set('Accept-Language', language)
       .set('ngrok-skip-browser-warning', 'true');
 
-    this.http.put(this.apiUrl, dataSubmit, {headers}).subscribe(
+    this.http.post(this.apiUrl, dataSubmit, {headers}).subscribe(
       (response: any) => {
         this.message = response.message;
         this.code = response.code;
         this.data = response.object;
         if (this.code === 1) {
           this.message = response.message;
-          alert(this.message);
+          alert(this.message)
           this.dialogRef.close();
         } else {
           this.message = response.message;
-          alert(this.message);
-          this.dialogRef.close();
+          alert(this.message)
         }
       },
       error => {
@@ -138,10 +125,14 @@ export class UpdateBookComponent {
     this.dialogRef.close();
   }
 
-
   getListCategory() {
     this.apiUrl = API_URL + 'category';
-    this.idToken = this.tokenService.getToken();
+    const tokenData = localStorage.getItem('idToken')?.trim();
+    if (tokenData) {
+      this.idToken = JSON.parse(tokenData);
+    } else {
+      this.idToken = '';
+    }
 
     const language = navigator.language;
     const headers = new HttpHeaders()

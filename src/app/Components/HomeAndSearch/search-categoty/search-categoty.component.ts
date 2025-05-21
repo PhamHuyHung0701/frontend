@@ -1,12 +1,12 @@
 import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {Router} from '@angular/router';
-import {API_URL} from '../../app.config';
-import {MenuComponent} from "../menu/menu.component";
+import {API_URL} from '../../../app.config';
+import {MenuComponent} from "../../Share/menu/menu.component";
 import {CommonModule} from '@angular/common';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {Book} from '../../Models/book';
-import { EndPageComponent } from "../end-page/end-page.component";
+import {Book} from '../../../Models/book';
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
 
 @Component({
   selector: 'app-search-categoty',

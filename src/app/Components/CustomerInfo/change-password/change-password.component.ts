@@ -1,12 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {MenuComponent} from '../menu/menu.component';
+import {MenuComponent} from '../../Share/menu/menu.component';
 import {CommonModule} from '@angular/common';
 import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {API_URL} from '../../app.config';
+import {API_URL} from '../../../app.config';
 import {Router} from '@angular/router';
 import {MatDialogRef} from '@angular/material/dialog';
-import { TokenService } from '../../Services/tokenService';
+import { TokenService } from '../../../Services/tokenService';
 
 @Component({
   selector: 'app-change-password',

@@ -2,15 +2,15 @@ import {CommonModule} from '@angular/common';
 import {HttpClient, HttpClientModule, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Component} from '@angular/core';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {API_URL} from '../../app.config';
-import {MenuComponent} from '../menu/menu.component';
+import {API_URL} from '../../../app.config';
+import {MenuComponent} from '../../Share/menu/menu.component';
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {UpdateBookComponent} from '../update-book/update-book.component';
 import {CreateBookComponent} from '../create-book/create-book.component';
-import {Book} from '../../Models/book';
-import { EndPageComponent } from "../end-page/end-page.component";
-import { TokenService } from '../../Services/tokenService';
+import {Book} from '../../../Models/book';
+import { EndPageComponent } from "../../Share/end-page/end-page.component";
+import { TokenService } from '../../../Services/tokenService';
 
 @Component({
   selector: 'app-book-manage',
