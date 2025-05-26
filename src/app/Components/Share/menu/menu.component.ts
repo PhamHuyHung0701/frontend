@@ -101,6 +101,10 @@ export class MenuComponent {
 
   onLogOut() {
     localStorage.setItem('idToken', '');
-    this.router.navigate(['/home']);
+    if (this.router.url === '/home') {
+      window.location.reload();
+    } else {
+      this.router.navigate(['/home']);
+    }
   }
 }
