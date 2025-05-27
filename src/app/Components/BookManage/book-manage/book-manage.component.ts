@@ -167,6 +167,7 @@ export class BookManageComponent {
   searchText: string = '';
 
   searchBook() {
+    localStorage.setItem('searchText', JSON.stringify(this.searchText));
     this.bookService.searchBook().subscribe(
       (response: any) => {
         this.message = response.message;
