@@ -41,27 +41,33 @@ export class BookinfoComponent {
   }
 
   onAddShoppingCart() {
-    this.bookService.onAddShoppingCart(this.book?.id ?? 0).subscribe(
-      (response: any) => {
-        this.message = response.message;
-        this.code = response.code;
-        this.data = response.object;
-        if (this.code === 1) {
+    this.idToken = this.tokenService.getToken();
+    if(this.idToken === '') {
+      this.router.navigate(['/login']);
+    }
+    else{
+      this.bookService.onAddShoppingCart(this.book?.id ?? 0).subscribe(
+        (response: any) => {
           this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
-        } else {
-          this.message = response.message;
-          setTimeout(() => {
-            this.message = '';
-          }, 3000);
+          this.code = response.code;
+          this.data = response.object;
+          if (this.code === 1) {
+            this.message = response.message;
+            setTimeout(() => {
+              this.message = '';
+            }, 3000);
+          } else {
+            this.message = response.message;
+            setTimeout(() => {
+              this.message = '';
+            }, 3000);
+          }
+        },
+        error => {
+          console.log("Error: " + error.message);
         }
-      },
-      error => {
-        console.log("Error: " + error.message);
-      }
-    )
-
+      )
+    }
+  
   }
 }
