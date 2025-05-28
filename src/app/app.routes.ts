@@ -12,6 +12,7 @@ import { SearchpageComponent } from './Components/HomeAndSearch/searchpage/searc
 import { PaymentComponent } from './Components/ShopCardAndPayment/payment/payment.component';
 import { ShopCartComponent } from './Components/ShopCardAndPayment/shop-cart/shop-cart.component';
 import { BillDetailComponent } from './Components/ShopCardAndPayment/bill-detail/bill-detail.component';
+import { BillManageComponent } from './Components/BillManage/bill-manage/bill-manage.component';
 
 
 export const routes: Routes = [
@@ -28,5 +29,6 @@ export const routes: Routes = [
   { path: 'customerinfo', component: CustomerInfoComponent },
   { path: 'accountmanage', component: AccountManageComponent },
   { path: 'billdetail', component: BillDetailComponent },
+  { path: 'billmanage', component: BillManageComponent},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];

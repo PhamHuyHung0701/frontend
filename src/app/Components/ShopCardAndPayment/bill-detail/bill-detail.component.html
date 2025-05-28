@@ -2,11 +2,11 @@
 <div class="bill-detail-card">
     <h2>Chi tiết hóa đơn</h2>
     <div class="bill-info">
-      <div><strong>Mã hóa đơn:</strong> {{ bill.id }}</div>
+      <div><strong>Người đặt hàng:</strong> {{ bill.user.name }}</div>
       <div><strong>Ngày:</strong> {{ bill.date }}</div>
       <div><strong>Tổng tiền:</strong> {{ bill.totalPrice | number }} đ</div>
       <div><strong>Địa chỉ:</strong> {{ bill.address }}</div>
-      <div><strong>Mô tả:</strong> {{ bill.description }}</div>
+      <div><strong>Trạng thái:</strong> {{ bill.status }}</div>
       <div><strong>Số điện thoại:</strong> {{ bill.phoneNumber }}</div>
     </div>
     <h3>Sản phẩm</h3>
@@ -31,4 +31,6 @@
       </tbody>
     </table>
   </div>
+  <br>
+  <br>
   <app-end-page></app-end-page>

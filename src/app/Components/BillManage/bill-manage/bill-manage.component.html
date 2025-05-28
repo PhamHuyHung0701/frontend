@@ -1,0 +1,125 @@
+<app-menu></app-menu>
+
+<div>
+    <div style="display: flex; width: 100%; gap: 100px; margin: 20px; align-items: center;">
+        <div  style="flex: 1; display: flex; align-items: center;">
+            <label for="name" style="margin-right: 56px;">Email:</label>
+            <input type="text" placeholder="Email" class="input" [(ngModel)]="email" name="email" (change)="searchBill()" required />
+        </div>
+        <div style="flex: 1; display: flex; align-items: center; margin-top: 20px;">
+            <label for="status" style="margin-right: 35px;">Trạng thái:</label>
+            <select class="input" id="status" name="status" [(ngModel)]="status" (change)="searchBill()">
+              <option value= "">Tất cả</option>
+              <option value="Đang giao">Đang giao</option>
+              <option value="Đã giao">Đã giao</option>
+              <option value="Đã hủy">Đã hủy</option>
+              <option value="Chờ xử lý">Chờ xử lý</option>
+            </select>
+          </div>
+    </div>
+    <div style="display: flex; width: 100%; gap: 100px; margin: 20px; align-items: center;">
+        <div style="flex: 1; display: flex; align-items: center;">
+            <label for="regTime" style="margin-right: 10px;">Ngày bắt đầu:</label>
+            <input type="date" class="input" [(ngModel)]="startDate" name="startDate" (change)="searchBill()" required>
+        </div>
+        <div style="flex: 1; display: flex; align-items: center;">
+            <label for="expireTime" style="margin-right: 10px;">Ngày kết thúc:</label>
+            <input type="date" class="input" [(ngModel)]="endDate" name="endDate" (change)="searchBill()" required>
+        </div>
+    </div>
+</div>
+<br>
+<div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+          <th>#</th>
+          <th>Ngày đặt hàng</th>
+          <th>Người đặt hàng</th>
+          <th>Email</th>
+          <th>Số điện thoại</th>
+          <th>Địa chỉ</th>
+          <th>Tổng hoá đơn</th>
+          <th>Trạng thái</th>
+          <th>Xem chi tiết</th>
+          <!-- <th>Hành động</th> -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr
+          *ngFor="let bill of data | paginate: { itemsPerPage: itemsPerPage, currentPage: currentPage }; let i = index">
+          <td>{{ (currentPage - 1) * itemsPerPage + i + 1 }}</td>
+          <td>{{ bill.date }}</td>
+          <td>{{ bill.user.name }}</td>
+          <td>{{ bill.user.email }}</td>
+          <td>{{ bill.phoneNumber }}</td>
+          <td>{{ bill.address }}</td>
+          <td>{{ bill.totalPrice}} đ</td>
+          <td>
+            <ng-container *ngIf="bill.status === 'Đang giao';">
+                <select class="input" [(ngModel)]="bill.status" (change)="updateBillStatus(bill, bill.status)">
+                  <option value="Đang giao">Đang giao</option>
+                  <option value="Đã giao">Đã giao</option>
+                  <!-- <option value="Đã hủy">Đã hủy</option> -->
+                  <!-- <option value="Chờ xử lý">Chờ xử lý</option> -->
+                </select>
+            </ng-container>
+            <ng-container *ngIf="bill.status === 'Đã giao';">
+                <select class="input" [(ngModel)]="bill.status" (change)="updateBillStatus(bill, bill.status)">
+                  <!-- <option value="Đang giao">Đang giao</option> -->
+                  <option value="Đã giao">Đã giao</option>
+                  <!-- <option value="Đã hủy">Đã hủy</option>
+                  <option value="Chờ xử lý">Chờ xử lý</option> -->
+                </select>
+            </ng-container>
+            <ng-container *ngIf="bill.status === 'Đã hủy';">
+                <select class="input" [(ngModel)]="bill.status" (change)="updateBillStatus(bill, bill.status)">
+                  <!-- <option value="Đang giao">Đang giao</option>
+                  <option value="Đã giao">Đã giao</option> -->
+                  <option value="Đã hủy">Đã hủy</option>
+                  <!-- <option value="Chờ xử lý">Chờ xử lý</option> -->
+                </select>
+            </ng-container>
+            <ng-container *ngIf="bill.status === 'Chờ xử lý';">
+                <select class="input" [(ngModel)]="bill.status" (change)="updateBillStatus(bill, bill.status)">
+                  <option value="Đang giao">Đang giao</option>
+                  <!-- <option value="Đã giao">Đã giao</option> -->
+                  <option value="Đã hủy">Đã hủy</option>
+                  <option value="Chờ xử lý">Chờ xử lý</option>
+                </select>
+            </ng-container>
+          </td>
+          <td>
+            <!-- <button class="btn-class-name">
+                <span class="back"></span>
+                <span class="front"></span>
+              </button> -->
+              <button (click)="viewBillDetail(bill)">
+                <p>Xem chi tiết</p>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="4"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  ></path>
+                </svg>
+              </button>
+          </td>
+        </tr>
+        <tr *ngIf="data.length === 0">
+          <td colspan="5" class="text-center">Không có dữ liệu</td>
+        </tr>
+        </tbody>
+      </table>
+      <br>
+      <pagination-controls (pageChange)="currentPage = $event"></pagination-controls>
+</div>
+
+<app-end-page></app-end-page>

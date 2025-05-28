@@ -71,6 +71,9 @@ export class MenuComponent {
     if (menu.id === 27) {
       this.router.navigate(['/accountmanage']);
     }
+    if(menu.id === 33) {
+      this.router.navigate(['/billmanage']);
+    }
   }
 
   onClickLevel2(event: Event, menu1: Menu, menu2: Menu) {
