@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Model files (generated)
+*.h5
+*.hdf5
+*.pkl
+*.pickle
+
+# Output files (generated)
+*.png
+*.jpg
+*.jpeg
+*.pdf
+
+# Data files (user should provide their own)
+# Keeping sample_data/ for reference
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
