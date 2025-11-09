@@ -40,3 +40,22 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Stock prediction model outputs (generated files)
+stock_prediction_model/*.h5
+stock_prediction_model/*.hdf5
+stock_prediction_model/*.pkl
+stock_prediction_model/*.pickle
+stock_prediction_model/*.png
+stock_prediction_model/*.jpg
+stock_prediction_model/*.pdf
